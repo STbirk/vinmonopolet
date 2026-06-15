@@ -1,0 +1,2980 @@
+{
+  "metadata": {
+    "source_file": "red_wines_test3.json",
+    "count": 25,
+    "elapsed_seconds": 1334.9
+  },
+  "summary": {
+    "vivino": {
+      "no_match": 11,
+      "matched": 14
+    },
+    "cellartracker": {
+      "no_match": 15,
+      "matched": 10
+    },
+    "falstaff": {
+      "no_match": 21,
+      "matched": 4
+    },
+    "wine_enthusiast": {
+      "no_match": 20,
+      "matched": 5
+    },
+    "wine_review_online": {
+      "no_match": 25
+    }
+  },
+  "wines": [
+    {
+      "productId": "9929801",
+      "productShortName": "Ressia Barbera d'Alba Superiore 2021",
+      "productLongName": "Ressia Barbera d'Alba Superiore 2021",
+      "vintage": "2021",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Barbera d'Alba",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 310.0,
+        "salesPricePrLiter": 413.33,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Barbera-d%27Alba/Ressia-Barbera-d%27Alba-Superiore-2021/p/9929801",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "8189201",
+      "productShortName": "Les Hauts de Beauséjour 2001",
+      "productLongName": "Les Hauts de Beauséjour 2001",
+      "vintage": "2001",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.0,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Bordeaux",
+      "subRegion": "Puisseguin-St. Emilion",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 304.9,
+        "salesPricePrLiter": 406.53,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Bordeaux/Puisseguin-St-Emilion/Les-Hauts-de-Beaus%C3%A9jour-2001/p/8189201",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Les Hauts de Beauséjour 2001",
+          "matched_name": "2001 Les Hauts de Beauséjour",
+          "matched_vintage": "2001",
+          "score": 88.4,
+          "rating_count": 16,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=4090332",
+          "match_confidence": 100.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "8187801",
+      "productShortName": "Ressia Gepù Langhe Nebbiolo 2021",
+      "productLongName": "Ressia Gepù Langhe Nebbiolo 2021",
+      "vintage": "2021",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Langhe",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 349.9,
+        "salesPricePrLiter": 466.53,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Langhe/Ressia-Gep%C3%B9-Langhe-Nebbiolo-2021/p/8187801",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Ressia Gepù Langhe Nebbiolo",
+          "matched_name": "Ressia Gepu Langhe Nebbiolo",
+          "matched_vintage": null,
+          "score": 3.9,
+          "rating_count": 333,
+          "url": "https://www.vivino.com/en/ressia-gepu-langhe-nebbiolo/w/1762553",
+          "match_confidence": 100.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Ressia Gepù Langhe Nebbiolo",
+        "matched_name": "Ressia Gepu Langhe Nebbiolo",
+        "matched_vintage": null,
+        "score": 3.9,
+        "rating_count": 333,
+        "url": "https://www.vivino.com/en/ressia-gepu-langhe-nebbiolo/w/1762553",
+        "match_confidence": 100.0
+      }
+    },
+    {
+      "productId": "7897707",
+      "productShortName": "Franco Conterno Bussia Riserva 5l 2011",
+      "productLongName": "Franco Conterno Bussia Riserva 5l 2011",
+      "vintage": "2011",
+      "volume": 5.0,
+      "volumeFormatted": "500 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Barolo",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 9073.6,
+        "salesPricePrLiter": 1814.72,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Barolo/Franco-Conterno-Bussia-Riserva-5l-2011/p/7897707",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Franco Conterno Bussia Riserva 5l 2011",
+          "matched_name": "Franco Conterno Barolo Bussia Munie Riserva 2011",
+          "matched_vintage": "2011",
+          "score": 4.4,
+          "rating_count": 251,
+          "url": "https://www.vivino.com/en/franco-conterno-barolo-bussia-munie-riserva/w/1495157?year=2011",
+          "match_confidence": 100.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Franco Conterno Bussia Riserva 5l 2011",
+          "matched_name": "2011 Franco Conterno Barolo Riserva Bussia Munie",
+          "matched_vintage": "2011",
+          "score": 91.7,
+          "rating_count": 3,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=2682774",
+          "match_confidence": 100.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Franco Conterno Bussia Riserva 5l 2011",
+          "matched_name": "Franco Conterno Na Punta Brut Metodo Classico",
+          "matched_vintage": null,
+          "score": 91.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/franco-conterno-na-punta-brut-metodo-classico",
+          "match_confidence": 85.5
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Franco Conterno Bussia Riserva 5l 2011",
+          "matched_name": "Franco Conterno 2011 Bussia Riserva Nebbiolo (Barolo)",
+          "matched_vintage": "2011",
+          "score": 92.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/franco-conterno-2011-bussia-riserva-barolo/",
+          "match_confidence": 95.0
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Franco Conterno Bussia Riserva 5l 2011",
+        "matched_name": "Franco Conterno Barolo Bussia Munie Riserva 2011",
+        "matched_vintage": "2011",
+        "score": 4.4,
+        "rating_count": 251,
+        "url": "https://www.vivino.com/en/franco-conterno-barolo-bussia-munie-riserva/w/1495157?year=2011",
+        "match_confidence": 100.0
+      }
+    },
+    {
+      "productId": "7897507",
+      "productShortName": "Franco Conterno Cascina Sciulun Langhe Nebbiolo 9 l 2019",
+      "productLongName": "Franco Conterno Cascina Sciulun Langhe Nebbiolo 9 l 2019",
+      "vintage": "2019",
+      "volume": 9.0,
+      "volumeFormatted": "900 cl",
+      "alcoholContent": 14.0,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Langhe",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 7622.5,
+        "salesPricePrLiter": 846.94,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Langhe/Franco-Conterno-Cascina-Sciulun-Langhe-Nebbiolo-9-l-2019/p/7897507",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Franco Conterno Cascina Sciulun Langhe Nebbiolo 9 l 2019",
+          "matched_name": "Franco Conterno Langhe Nebbiolo Cascina Sciulun",
+          "matched_vintage": null,
+          "score": 3.9,
+          "rating_count": 1890,
+          "url": "https://www.vivino.com/en/franco-conterno-langhe-nebbiolo-cascina-sciulun/w/1561451",
+          "match_confidence": 95.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": "Franco Conterno Cascina Sciulun Langhe Nebbiolo 9 l 2019",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": 58.7
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Franco Conterno Cascina Sciulun Langhe Nebbiolo 9 l",
+          "matched_name": "Franco Conterno NV Metodo Classico Punta Extra Brut Nebbiolo (Vino Spumante)",
+          "matched_vintage": null,
+          "score": 88.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/franco-conterno-nv-metodo-classico-punta-extra-brut-nebbiolo-vino-spumante/",
+          "match_confidence": 85.5
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Franco Conterno Cascina Sciulun Langhe Nebbiolo 9 l 2019",
+        "matched_name": "Franco Conterno Langhe Nebbiolo Cascina Sciulun",
+        "matched_vintage": null,
+        "score": 3.9,
+        "rating_count": 1890,
+        "url": "https://www.vivino.com/en/franco-conterno-langhe-nebbiolo-cascina-sciulun/w/1561451",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "7746001",
+      "productShortName": "Ten. Chiccheri Valpolicella Superiore 2017",
+      "productLongName": "Ten. Chiccheri Valpolicella Superiore 2017",
+      "vintage": "2017",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Veneto",
+      "subRegion": "Valpolicella",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 399.9,
+        "salesPricePrLiter": 533.2,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Veneto/Valpolicella/Ten-Chiccheri-Valpolicella-Superiore-2017/p/7746001",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "7745901",
+      "productShortName": "Ten. Chiccheri Valpolicella Ripasso Superiore 2020",
+      "productLongName": "Ten. Chiccheri Valpolicella Ripasso Superiore 2020",
+      "vintage": "2020",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.0,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Veneto",
+      "subRegion": "Valpolicella Ripasso",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 349.9,
+        "salesPricePrLiter": 466.53,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Veneto/Valpolicella-Ripasso/Ten-Chiccheri-Valpolicella-Ripasso-Superiore-2020/p/7745901",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "7736901",
+      "productShortName": "Olivero Mario Buschet Dolcetto d'Alba 2021",
+      "productLongName": "Olivero Mario Buschet Dolcetto d'Alba 2021",
+      "vintage": "2021",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.0,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Dolcetto d'Alba",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 299.9,
+        "salesPricePrLiter": 399.87,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Dolcetto-d%27Alba/Olivero-Mario-Buschet-Dolcetto-d%27Alba-2021/p/7736901",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Olivero Mario Buschet Dolcetto d'Alba 2021",
+          "matched_name": "Olivero Mario Buschet Dolcetto d'Alba",
+          "matched_vintage": null,
+          "score": 3.9,
+          "rating_count": 149,
+          "url": "https://www.vivino.com/en/olivero-mario-buschet-dolcetto-dalba-e042f/w/2106208",
+          "match_confidence": 100.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Olivero Mario Buschet Dolcetto d'Alba 2021",
+        "matched_name": "Olivero Mario Buschet Dolcetto d'Alba",
+        "matched_vintage": null,
+        "score": 3.9,
+        "rating_count": 149,
+        "url": "https://www.vivino.com/en/olivero-mario-buschet-dolcetto-dalba-e042f/w/2106208",
+        "match_confidence": 100.0
+      }
+    },
+    {
+      "productId": "7736701",
+      "productShortName": "Olivero Mario Langhe Nebbiolo 2021",
+      "productLongName": "Olivero Mario Langhe Nebbiolo 2021",
+      "vintage": "2021",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Langhe",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 329.9,
+        "salesPricePrLiter": 439.87,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Langhe/Olivero-Mario-Langhe-Nebbiolo-2021/p/7736701",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "7728001",
+      "productShortName": "Olivero Mario Barbera d'Alba 2021",
+      "productLongName": "Olivero Mario Barbera d'Alba 2021",
+      "vintage": "2021",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 15.0,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Barbera d'Alba",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 299.9,
+        "salesPricePrLiter": 399.87,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Barbera-d%27Alba/Olivero-Mario-Barbera-d%27Alba-2021/p/7728001",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Olivero Mario Barbera d'Alba",
+          "matched_name": "Olivero Mario Barbera d'Alba",
+          "matched_vintage": null,
+          "score": 3.8,
+          "rating_count": 381,
+          "url": "https://www.vivino.com/en/olivero-mario-barbera-d-alba/w/1203225",
+          "match_confidence": 100.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Olivero Mario Barbera d'Alba",
+        "matched_name": "Olivero Mario Barbera d'Alba",
+        "matched_vintage": null,
+        "score": 3.8,
+        "rating_count": 381,
+        "url": "https://www.vivino.com/en/olivero-mario-barbera-d-alba/w/1203225",
+        "match_confidence": 100.0
+      }
+    },
+    {
+      "productId": "7673601",
+      "productShortName": "Dom. de la Butte Bourgueil Perrières 2017",
+      "productLongName": "Dom. de la Butte Bourgueil Perrières 2017",
+      "vintage": "2017",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.5,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Loire",
+      "subRegion": "Bourgueil",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 449.9,
+        "salesPricePrLiter": 599.87,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Loire/Bourgueil/Dom-de-la-Butte-Bourgueil-Perri%C3%A8res-2017/p/7673601",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Dom. de la Butte Bourgueil Perrières 2017",
+          "matched_name": "Domaine de la Butte Perrières Bourgueil",
+          "matched_vintage": null,
+          "score": 3.9,
+          "rating_count": 822,
+          "url": "https://www.vivino.com/en/butte-perrieres-bourgueil/w/1284771",
+          "match_confidence": 89.86
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Dom. de la Butte Bourgueil Perrières 2017",
+          "matched_name": "2017 Domaine de la Butte Bourgueil Perrières",
+          "matched_vintage": "2017",
+          "score": 90.8,
+          "rating_count": 6,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=3216806",
+          "match_confidence": 99.59
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Dom. de la Butte Bourgueil Perrières 2017",
+          "matched_name": "Domaine de la Butte 2017 Perrières Cabernet Franc (Bourgueil)",
+          "matched_vintage": "2017",
+          "score": 93.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/domaine-de-la-butte-2017-perrieres-cabernet-franc-bourgueil/",
+          "match_confidence": 90.5
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Dom. de la Butte Bourgueil Perrières 2017",
+        "matched_name": "Domaine de la Butte Perrières Bourgueil",
+        "matched_vintage": null,
+        "score": 3.9,
+        "rating_count": 822,
+        "url": "https://www.vivino.com/en/butte-perrieres-bourgueil/w/1284771",
+        "match_confidence": 89.86
+      }
+    },
+    {
+      "productId": "7673101",
+      "productShortName": "Lambert Chinon Les Perruches 2023",
+      "productLongName": "Lambert Chinon Les Perruches 2023",
+      "vintage": "2023",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.0,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Loire",
+      "subRegion": "Chinon",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 299.7,
+        "salesPricePrLiter": 399.6,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Loire/Chinon/Lambert-Chinon-Les-Perruches-2023/p/7673101",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Lambert Chinon Les Perruches",
+          "matched_name": "Pascal Lambert Les Perruches Chinon",
+          "matched_vintage": null,
+          "score": 3.9,
+          "rating_count": 1244,
+          "url": "https://www.vivino.com/en/pascal-lambert-les-perruches-chinon/w/1896127",
+          "match_confidence": 95.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Lambert Chinon Les Perruches",
+        "matched_name": "Pascal Lambert Les Perruches Chinon",
+        "matched_vintage": null,
+        "score": 3.9,
+        "rating_count": 1244,
+        "url": "https://www.vivino.com/en/pascal-lambert-les-perruches-chinon/w/1896127",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "7353001",
+      "productShortName": "Hirsch Raschen Ridge Pinot Noir 2023",
+      "productLongName": "Hirsch Raschen Ridge Pinot Noir 2023",
+      "vintage": "2023",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma Coast",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 1399.9,
+        "salesPricePrLiter": 1866.53,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-Coast/Hirsch-Raschen-Ridge-Pinot-Noir-2023/p/7353001",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Hirsch Raschen Ridge Pinot Noir 2023",
+          "matched_name": "Hirsch Vineyards Raschen Ridge Pinot Noir",
+          "matched_vintage": null,
+          "score": 4.3,
+          "rating_count": 554,
+          "url": "https://www.vivino.com/en/hirsch-vineyards-raschen-ridge-pinot-noir/w/5292433",
+          "match_confidence": 95.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Hirsch Raschen Ridge Pinot Noir 2023",
+        "matched_name": "Hirsch Vineyards Raschen Ridge Pinot Noir",
+        "matched_vintage": null,
+        "score": 4.3,
+        "rating_count": 554,
+        "url": "https://www.vivino.com/en/hirsch-vineyards-raschen-ridge-pinot-noir/w/5292433",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "6839901",
+      "productShortName": "Gironda Le Nicchie Nizza 2022",
+      "productLongName": "Gironda Le Nicchie Nizza 2022",
+      "vintage": "2022",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 15.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Piemonte",
+      "subRegion": "Barbera d'Asti",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 455.0,
+        "salesPricePrLiter": 606.67,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Piemonte/Barbera-d%27Asti/Gironda-Le-Nicchie-Nizza-2022/p/6839901",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Gironda Le Nicchie Nizza",
+          "matched_name": "La Gironda Le Nicchie Barbera d'Asti Superiore Nizza",
+          "matched_vintage": null,
+          "score": 4.1,
+          "rating_count": 1183,
+          "url": "https://www.vivino.com/en/la-gironda-le-nicchie-barbera-d-asti-superiore-nizza/w/1212109",
+          "match_confidence": 85.5
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Gironda Le Nicchie Nizza",
+        "matched_name": "La Gironda Le Nicchie Barbera d'Asti Superiore Nizza",
+        "matched_vintage": null,
+        "score": 4.1,
+        "rating_count": 1183,
+        "url": "https://www.vivino.com/en/la-gironda-le-nicchie-barbera-d-asti-superiore-nizza/w/1212109",
+        "match_confidence": 85.5
+      }
+    },
+    {
+      "productId": "6221601",
+      "productShortName": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+      "productLongName": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+      "vintage": "2021",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Toscana",
+      "subRegion": "Brunello di Montalcino",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 799.6,
+        "salesPricePrLiter": 1066.13,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Toscana/Brunello-di-Montalcino/Caparzo-Brunello-di-Montalcino-Vigna-La-Casa-2021/p/6221601",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+          "matched_name": "Caparzo La Casa Brunello di Montalcino",
+          "matched_vintage": null,
+          "score": 4.3,
+          "rating_count": 6919,
+          "url": "https://www.vivino.com/en/caparzo-la-casa-brunello-di-montalcino/w/77487",
+          "match_confidence": 95.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+          "matched_name": "Caparzo Vigna \"La Casa\" Brunello di Montalcino DOCG",
+          "matched_vintage": "2021",
+          "score": 94.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/caparzo-2021-vigna-la-casa-brunello-di-montalcino-docg",
+          "match_confidence": 100.0
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+        "matched_name": "Caparzo La Casa Brunello di Montalcino",
+        "matched_vintage": null,
+        "score": 4.3,
+        "rating_count": 6919,
+        "url": "https://www.vivino.com/en/caparzo-la-casa-brunello-di-montalcino/w/77487",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "5739901",
+      "productShortName": "Quintarelli Alzero Cabernet 2015",
+      "productLongName": "Quintarelli Alzero Cabernet 2015",
+      "vintage": "2015",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 16.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Veneto",
+      "subRegion": null,
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4249.9,
+        "salesPricePrLiter": 5666.53,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Veneto/Quintarelli-Alzero-Cabernet-2015/p/5739901",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Quintarelli Alzero Cabernet 2015",
+          "matched_name": "Quintarelli Giuseppe Veneto Alzero Cabernet 2015",
+          "matched_vintage": "2015",
+          "score": 4.7,
+          "rating_count": 75,
+          "url": "https://www.vivino.com/en/quintarelli-giuseppe-veneto-alzero-cabernet/w/1194532?year=2015",
+          "match_confidence": 90.5
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Quintarelli Alzero Cabernet 2015",
+          "matched_name": "2015 Giuseppe Quintarelli Cabernet Alzero",
+          "matched_vintage": "2015",
+          "score": 94.0,
+          "rating_count": 3,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=4763506",
+          "match_confidence": 100.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Quintarelli Alzero Cabernet 2015",
+        "matched_name": "Quintarelli Giuseppe Veneto Alzero Cabernet 2015",
+        "matched_vintage": "2015",
+        "score": 4.7,
+        "rating_count": 75,
+        "url": "https://www.vivino.com/en/quintarelli-giuseppe-veneto-alzero-cabernet/w/1194532?year=2015",
+        "match_confidence": 90.5
+      }
+    },
+    {
+      "productId": "5472406",
+      "productShortName": "Cant. di Ora Amicale Veneto Rosso 2021",
+      "productLongName": "Cant. di Ora Amicale Veneto Rosso 2021",
+      "vintage": "2021",
+      "volume": 3.0,
+      "volumeFormatted": "300 cl",
+      "alcoholContent": 14.0,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Veneto",
+      "subRegion": null,
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Testutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 559.9,
+        "salesPricePrLiter": 186.63,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Veneto/Cant-di-Ora-Amicale-Veneto-Rosso-2021/p/5472406",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "5364601",
+      "productShortName": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+      "productLongName": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+      "vintage": "2011",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Spring Mountain District",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4624.1,
+        "salesPricePrLiter": 6165.47,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Spring-Mountain-District/Lokoya-Spring-Mountain-Cabernet-Sauvignon-2011/p/5364601",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+          "matched_name": "Lokoya Spring Mountain District Cabernet Sauvignon",
+          "matched_vintage": null,
+          "score": 4.6,
+          "rating_count": 779,
+          "url": "https://www.vivino.com/en/lokoya-winery-spring-mountain-district-cabernet-sauvignon/w/83718",
+          "match_confidence": 95.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+          "matched_name": "2011 Lokoya Cabernet Sauvignon Spring Mountain District",
+          "matched_vintage": "2011",
+          "score": 92.0,
+          "rating_count": 2,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1836944",
+          "match_confidence": 100.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+        "matched_name": "Lokoya Spring Mountain District Cabernet Sauvignon",
+        "matched_vintage": null,
+        "score": 4.6,
+        "rating_count": 779,
+        "url": "https://www.vivino.com/en/lokoya-winery-spring-mountain-district-cabernet-sauvignon/w/83718",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "5356901",
+      "productShortName": "Vérité La Muse 2011",
+      "productLongName": "Vérité La Muse 2011",
+      "vintage": "2011",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma County",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4630.6,
+        "salesPricePrLiter": 6174.13,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-County/V%C3%A9rit%C3%A9-La-Muse-2011/p/5356901",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Vérité La Muse 2011",
+          "matched_name": "2011 Vérité La Muse",
+          "matched_vintage": "2011",
+          "score": 95.0,
+          "rating_count": 12,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1380261",
+          "match_confidence": 100.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "5356801",
+      "productShortName": "Vérité La Joie 2011",
+      "productLongName": "Vérité La Joie 2011",
+      "vintage": "2011",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma County",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4625.4,
+        "salesPricePrLiter": 6167.2,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-County/V%C3%A9rit%C3%A9-La-Joie-2011/p/5356801",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Vérité La Joie 2011",
+          "matched_name": "2011 Vérité La Joie",
+          "matched_vintage": "2011",
+          "score": 93.9,
+          "rating_count": 17,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1380260",
+          "match_confidence": 100.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "5356701",
+      "productShortName": "Vérité La Joie 2009",
+      "productLongName": "Vérité La Joie 2009",
+      "vintage": "2009",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma County",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4846.5,
+        "salesPricePrLiter": 6462.0,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-County/V%C3%A9rit%C3%A9-La-Joie-2009/p/5356701",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Vérité La Joie 2009",
+          "matched_name": "2009 Vérité La Joie",
+          "matched_vintage": "2009",
+          "score": 94.6,
+          "rating_count": 15,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1155531",
+          "match_confidence": 100.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "5324801",
+      "productShortName": "Cèdre Héritage 2023",
+      "productLongName": "Cèdre Héritage 2023",
+      "vintage": "2023",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 12.5,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Sørvest",
+      "subRegion": "Cahors",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 219.9,
+        "salesPricePrLiter": 293.2,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/S%C3%B8rvest/Cahors/C%C3%A8dre-H%C3%A9ritage-2023/p/5324801",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Cèdre Héritage",
+          "matched_name": "Château du Cèdre Cèdre Héritage Chardonnay",
+          "matched_vintage": null,
+          "score": 3.8,
+          "rating_count": 132,
+          "url": "https://www.vivino.com/en/cedre-cedre-heritage-chardonnay/w/11750352",
+          "match_confidence": 90.0
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Cèdre Héritage",
+        "matched_name": "Château du Cèdre Cèdre Héritage Chardonnay",
+        "matched_vintage": null,
+        "score": 3.8,
+        "rating_count": 132,
+        "url": "https://www.vivino.com/en/cedre-cedre-heritage-chardonnay/w/11750352",
+        "match_confidence": 90.0
+      }
+    },
+    {
+      "productId": "5264201",
+      "productShortName": "Terre di San Leonardo 2022",
+      "productLongName": "Terre di San Leonardo 2022",
+      "vintage": "2022",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.0,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Dolomiti (Dolomiten)",
+      "subRegion": null,
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Testutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 279.9,
+        "salesPricePrLiter": 373.2,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Dolomiti-%28Dolomiten%29/Terre-di-San-Leonardo-2022/p/5264201",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Terre di San Leonardo 2022",
+          "matched_name": "2022 San Leonardo Terre di San Leonardo",
+          "matched_vintage": "2022",
+          "score": 86.0,
+          "rating_count": 2,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=5445594",
+          "match_confidence": 95.0
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Terre di San Leonardo 2022",
+          "matched_name": "Terre di San Leonardo Vigneti delle Dolomiti IGT",
+          "matched_vintage": "2022",
+          "score": 92.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/san-leonardo-2022-terre-di-san-leonardo-vigneti-delle-dolomiti-igt-1",
+          "match_confidence": 95.0
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "295801",
+      "productShortName": "Hirsch Pinot Noir Reserve 2023",
+      "productLongName": "Hirsch Pinot Noir Reserve 2023",
+      "vintage": "2023",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.4,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma Coast",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 1450.0,
+        "salesPricePrLiter": 1933.33,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-Coast/Hirsch-Pinot-Noir-Reserve-2023/p/295801",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Hirsch Pinot Noir Reserve 2023",
+          "matched_name": "Hirsch 2023 Hirschvergnügen Grüner Veltliner (Kamptal)",
+          "matched_vintage": "2023",
+          "score": 87.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/hirsch-2023-hirschvergnugen-gruner-veltliner-kamptal/",
+          "match_confidence": 90.5
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "2229101",
+      "productShortName": "Ch. Beauséjour 2018",
+      "productLongName": "Ch. Beauséjour 2018",
+      "vintage": "2018",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.0,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Bordeaux",
+      "subRegion": "Puisseguin-St. Emilion",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 299.9,
+        "salesPricePrLiter": 399.87,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Bordeaux/Puisseguin-St-Emilion/Ch-Beaus%C3%A9jour-2018/p/2229101",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Ch. Beauséjour",
+          "matched_name": "Château Beausejour Montagne-Saint-Émilion",
+          "matched_vintage": null,
+          "score": 4.0,
+          "rating_count": 664,
+          "url": "https://www.vivino.com/en/chateau-beausejour-montagne-saint-emilion-1614-montagne-saint-emilion/w/3130951",
+          "match_confidence": 85.5
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Ch. Beauséjour 2018",
+          "matched_name": "2018 Château Beauséjour (Puisseguin-St",
+          "matched_vintage": "2018",
+          "score": 90.0,
+          "rating_count": 5,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=3606624",
+          "match_confidence": 90.5
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Ch. Beauséjour 2018",
+          "matched_name": "Château Beauséjour Duffau-Lagarrosse",
+          "matched_vintage": "2018",
+          "score": 100.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/chateau-beausejour-duffau-lagarrosse-2018-chateau-beausejour-duffau-lagarrosse",
+          "match_confidence": 90.5
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Ch. Beauséjour 2018",
+          "matched_name": "Château Beauséjour 2018  Puisseguin Saint-Émilion",
+          "matched_vintage": "2018",
+          "score": 91.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/chateau-beausejour-2018-puisseguin-saint-emilion/",
+          "match_confidence": 90.5
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Ch. Beauséjour",
+        "matched_name": "Château Beausejour Montagne-Saint-Émilion",
+        "matched_vintage": null,
+        "score": 4.0,
+        "rating_count": 664,
+        "url": "https://www.vivino.com/en/chateau-beausejour-montagne-saint-emilion-1614-montagne-saint-emilion/w/3130951",
+        "match_confidence": 85.5
+      }
+    }
+  ]
+}

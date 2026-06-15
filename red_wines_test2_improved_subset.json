@@ -1,0 +1,1468 @@
+{
+  "metadata": {
+    "source_file": "red_wines_test2.json",
+    "indices": [
+      14,
+      17,
+      18,
+      19,
+      20,
+      63,
+      67,
+      68,
+      70,
+      71
+    ],
+    "rating_sources": [
+      "vivino",
+      "cellartracker",
+      "falstaff",
+      "wine_enthusiast",
+      "wine_review_online"
+    ],
+    "count": 10,
+    "note": "Verification subset produced after adding Falstaff, Wine Enthusiast, and Wine Review Online."
+  },
+  "summary": {
+    "vivino": {
+      "matched": 5,
+      "no_match": 5
+    },
+    "cellartracker": {
+      "blocked": 2,
+      "matched": 8
+    },
+    "falstaff": {
+      "matched": 5,
+      "no_match": 5
+    },
+    "wine_enthusiast": {
+      "blocked": 7,
+      "matched": 3
+    },
+    "wine_review_online": {
+      "no_match": 10
+    }
+  },
+  "wines": [
+    {
+      "productId": "6221601",
+      "productShortName": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+      "productLongName": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+      "vintage": "2021",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Italia",
+      "region": "Toscana",
+      "subRegion": "Brunello di Montalcino",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 799.6,
+        "salesPricePrLiter": 1066.13,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Italia/Toscana/Brunello-di-Montalcino/Caparzo-Brunello-di-Montalcino-Vigna-La-Casa-2021/p/6221601",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+          "matched_name": "Caparzo La Casa Brunello di Montalcino",
+          "matched_vintage": null,
+          "score": 4.3,
+          "rating_count": 6919,
+          "url": "https://www.vivino.com/en/caparzo-la-casa-brunello-di-montalcino/w/77487",
+          "match_confidence": 95.0
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "blocked",
+          "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021 Italy",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "CellarTracker returned status 403 or block page"
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+          "matched_name": "Caparzo Vigna \"La Casa\" Brunello di Montalcino DOCG",
+          "matched_vintage": "2021",
+          "score": 94.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/caparzo-2021-vigna-la-casa-brunello-di-montalcino-docg",
+          "match_confidence": 100.0
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "blocked",
+          "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine Enthusiast returned status 403 or block page"
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Caparzo Brunello di Montalcino Vigna La Casa 2021",
+        "matched_name": "Caparzo La Casa Brunello di Montalcino",
+        "matched_vintage": null,
+        "score": 4.3,
+        "rating_count": 6919,
+        "url": "https://www.vivino.com/en/caparzo-la-casa-brunello-di-montalcino/w/77487",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "5364601",
+      "productShortName": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+      "productLongName": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+      "vintage": "2011",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Spring Mountain District",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4624.1,
+        "salesPricePrLiter": 6165.47,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Spring-Mountain-District/Lokoya-Spring-Mountain-Cabernet-Sauvignon-2011/p/5364601",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+          "matched_name": "Lokoya Spring Mountain District Cabernet Sauvignon",
+          "matched_vintage": null,
+          "score": 4.6,
+          "rating_count": 779,
+          "url": "https://www.vivino.com/en/lokoya-winery-spring-mountain-district-cabernet-sauvignon/w/83718",
+          "match_confidence": 95.0
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+          "matched_name": "2011 Lokoya Cabernet Sauvignon Spring Mountain District",
+          "matched_vintage": "2011",
+          "score": 92.0,
+          "rating_count": 2,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1836944",
+          "match_confidence": 100.0
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "blocked",
+          "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine Enthusiast returned status 403 or block page"
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Lokoya Spring Mountain Cabernet Sauvignon 2011",
+        "matched_name": "Lokoya Spring Mountain District Cabernet Sauvignon",
+        "matched_vintage": null,
+        "score": 4.6,
+        "rating_count": 779,
+        "url": "https://www.vivino.com/en/lokoya-winery-spring-mountain-district-cabernet-sauvignon/w/83718",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "5356901",
+      "productShortName": "Vérité La Muse 2011",
+      "productLongName": "Vérité La Muse 2011",
+      "vintage": "2011",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma County",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4630.6,
+        "salesPricePrLiter": 6174.13,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-County/V%C3%A9rit%C3%A9-La-Muse-2011/p/5356901",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Vérité La Muse 2011",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Vérité La Muse 2011",
+          "matched_name": "2011 Vérité La Muse",
+          "matched_vintage": "2011",
+          "score": 95.0,
+          "rating_count": 12,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1380261",
+          "match_confidence": 100.0
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "blocked",
+          "search_query": "Vérité La Muse 2011",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine Enthusiast returned status 403 or block page"
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "5356801",
+      "productShortName": "Vérité La Joie 2011",
+      "productLongName": "Vérité La Joie 2011",
+      "vintage": "2011",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma County",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4625.4,
+        "salesPricePrLiter": 6167.2,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-County/V%C3%A9rit%C3%A9-La-Joie-2011/p/5356801",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Vérité La Joie 2011",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Vérité La Joie 2011",
+          "matched_name": "2011 Vérité La Joie",
+          "matched_vintage": "2011",
+          "score": 93.9,
+          "rating_count": 17,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1380260",
+          "match_confidence": 100.0
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "blocked",
+          "search_query": "Vérité La Joie 2011",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine Enthusiast returned status 403 or block page"
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "5356701",
+      "productShortName": "Vérité La Joie 2009",
+      "productLongName": "Vérité La Joie 2009",
+      "vintage": "2009",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Sonoma County",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 4846.5,
+        "salesPricePrLiter": 6462.0,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Sonoma-County/V%C3%A9rit%C3%A9-La-Joie-2009/p/5356701",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Vérité La Joie 2009",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Vérité La Joie 2009",
+          "matched_name": "2009 Vérité La Joie",
+          "matched_vintage": "2009",
+          "score": 94.6,
+          "rating_count": 15,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=1155531",
+          "match_confidence": 100.0
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "blocked",
+          "search_query": "Vérité La Joie 2009",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine Enthusiast returned status 403 or block page"
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "20577901",
+      "productShortName": "Ch. Certan de May",
+      "productLongName": "Ch. Certan de May",
+      "vintage": null,
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Bordeaux",
+      "subRegion": "Pomerol",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 1900.0,
+        "salesPricePrLiter": 2533.33,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Bordeaux/Pomerol/Ch-Certan-de-May/p/20577901",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Ch. Certan de May",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "blocked",
+          "search_query": "Ch. Certan de May France",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "CellarTracker returned status 403 or block page"
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Ch. Certan de May",
+          "matched_name": "Château Certan de May de Certan Château Certan de May",
+          "matched_vintage": "2025",
+          "score": 95.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/chateau-certan-de-may-de-certan-2025-chateau-certan-de-may-1",
+          "match_confidence": 85.5
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Ch. Certan de May",
+          "matched_name": "Château Certan de May de Certan 2022  Pomerol",
+          "matched_vintage": "2022",
+          "score": 94.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/chateau-certan-de-may-de-certan-2022-pomerol/",
+          "match_confidence": 85.5
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "20577305",
+      "productShortName": "Ch. Potensac 2018",
+      "productLongName": "Ch. Potensac 2018",
+      "vintage": "2018",
+      "volume": 1.5,
+      "volumeFormatted": "150 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Bordeaux",
+      "subRegion": "Médoc",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 1000.0,
+        "salesPricePrLiter": 666.67,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Bordeaux/M%C3%A9doc/Ch-Potensac-2018/p/20577305",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Ch. Potensac 2018",
+          "matched_name": "Château Potensac Chapelle de Potensac Médoc 2018",
+          "matched_vintage": "2018",
+          "score": 3.9,
+          "rating_count": 497,
+          "url": "https://www.vivino.com/en/chateau-potensac-chapelle-de-potensac-medoc/w/1127496?year=2018",
+          "match_confidence": 90.5
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Ch. Potensac 2018",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Ch. Potensac 2018",
+          "matched_name": "2018 Château Potensac La Chapelle de Potensac",
+          "matched_vintage": "2018",
+          "score": 88.2,
+          "rating_count": 11,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=3331645",
+          "match_confidence": 90.5
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Ch. Potensac 2018",
+          "matched_name": "Château Potensac",
+          "matched_vintage": "2018",
+          "score": 93.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/chateau-pontensac-2018-chateau-potensac",
+          "match_confidence": 86.48
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Ch. Potensac 2018",
+          "matched_name": "Château Potensac 2018  Médoc",
+          "matched_vintage": "2018",
+          "score": 91.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/chateau-potensac-2018-medoc/",
+          "match_confidence": 90.5
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Ch. Potensac 2018",
+        "matched_name": "Château Potensac Chapelle de Potensac Médoc 2018",
+        "matched_vintage": "2018",
+        "score": 3.9,
+        "rating_count": 497,
+        "url": "https://www.vivino.com/en/chateau-potensac-chapelle-de-potensac-medoc/w/1127496?year=2018",
+        "match_confidence": 90.5
+      }
+    },
+    {
+      "productId": "20577101",
+      "productShortName": "Ulysses 2018",
+      "productLongName": "Ulysses 2018",
+      "vintage": "2018",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "USA",
+      "region": "California",
+      "subRegion": "Oakville",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 1799.9,
+        "salesPricePrLiter": 2399.87,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/USA/California/Oakville/Ulysses-2018/p/20577101",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Ulysses 2018",
+          "matched_name": "Ulysses Ulysses 2018",
+          "matched_vintage": "2018",
+          "score": 4.4,
+          "rating_count": 266,
+          "url": "https://www.vivino.com/ulysses-vineyard-ulysses/w/2870222?year=2018",
+          "match_confidence": 95.0
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Ulysses 2018",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Ulysses 2018",
+          "matched_name": "2018 Ulysses Oakville",
+          "matched_vintage": "2018",
+          "score": 92.9,
+          "rating_count": 31,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=4062122",
+          "match_confidence": 95.0
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "blocked",
+          "search_query": "Ulysses 2018",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine Enthusiast returned status 403 or block page"
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Ulysses 2018",
+        "matched_name": "Ulysses Ulysses 2018",
+        "matched_vintage": "2018",
+        "score": 4.4,
+        "rating_count": 266,
+        "url": "https://www.vivino.com/ulysses-vineyard-ulysses/w/2870222?year=2018",
+        "match_confidence": 95.0
+      }
+    },
+    {
+      "productId": "20576401",
+      "productShortName": "Ch. Latour à Pomerol 2022",
+      "productLongName": "Ch. Latour à Pomerol 2022",
+      "vintage": "2022",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 13.0,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Bordeaux",
+      "subRegion": "Pomerol",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 1099.9,
+        "salesPricePrLiter": 1466.53,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Bordeaux/Pomerol/Ch-Latour-%C3%A0-Pomerol-2022/p/20576401",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Ch. Latour à Pomerol 2022",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Ch. Latour à Pomerol 2022",
+          "matched_name": "2022 Château Latour à Pomerol",
+          "matched_vintage": "2022",
+          "score": 92.7,
+          "rating_count": 8,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=4641729",
+          "match_confidence": 93.37
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Ch. Latour à Pomerol 2022",
+          "matched_name": "Château Latour à Pomerol",
+          "matched_vintage": "2022",
+          "score": 97.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/chateau-latour-a-pomerol-2022-chateau-latour-a-pomerol",
+          "match_confidence": 93.37
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "matched",
+          "search_query": "Ch. Latour à Pomerol 2022",
+          "matched_name": "Château Latour à Pomerol 2022  Pomerol",
+          "matched_vintage": "2022",
+          "score": 93.0,
+          "rating_count": null,
+          "url": "https://www.wineenthusiast.com/buying-guide/chateau-latour-a-pomerol-2022-pomerol/",
+          "match_confidence": 90.5
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "no_match",
+        "search_query": null,
+        "matched_name": null,
+        "matched_vintage": null,
+        "score": null,
+        "rating_count": null,
+        "url": null,
+        "match_confidence": null
+      }
+    },
+    {
+      "productId": "20576301",
+      "productShortName": "Blason d'Issan 2022",
+      "productLongName": "Blason d'Issan 2022",
+      "vintage": "2022",
+      "volume": 0.75,
+      "volumeFormatted": "75 cl",
+      "alcoholContent": 14.5,
+      "ageLimit": "18",
+      "country": "Frankrike",
+      "region": "Bordeaux",
+      "subRegion": "Margaux",
+      "classification": {
+        "mainProductTypeName": "Rødvin",
+        "subProductTypeName": null,
+        "productTypeName": "Rødvin",
+        "productGroupName": "Rødvin"
+      },
+      "grapes": [],
+      "sugar": null,
+      "acid": null,
+      "sensory": {
+        "colour": null,
+        "odour": null,
+        "taste": null,
+        "freshness": null,
+        "fullness": null,
+        "bitterness": null,
+        "sweetness": null,
+        "tannins": null,
+        "recommendedFood": []
+      },
+      "assortment": {
+        "assortment": "Bestillingsutvalget",
+        "validFrom": null,
+        "listedFrom": null
+      },
+      "saleStatus": {
+        "name": "aktiv",
+        "validFrom": null
+      },
+      "price": {
+        "priceValidFrom": null,
+        "salesPrice": 499.9,
+        "salesPricePrLiter": 666.53,
+        "bottleReturnValue": null
+      },
+      "url": "https://www.vinmonopolet.no/Land/Frankrike/Bordeaux/Margaux/Blason-d%27Issan-2022/p/20576301",
+      "source": "vinmonopolet_public_search",
+      "ratings": {
+        "vivino": {
+          "source": "vivino",
+          "status": "matched",
+          "search_query": "Blason d'Issan",
+          "matched_name": "Château d'Issan Blason d'Issan Margaux",
+          "matched_vintage": null,
+          "score": 4.1,
+          "rating_count": 13745,
+          "url": "https://www.vivino.com/en/chateau-d-issan-blason-d-issan-margaux/w/1984519",
+          "match_confidence": 90.0
+        },
+        "wine_searcher": {
+          "source": "wine_searcher",
+          "status": "blocked",
+          "search_query": "Blason d'Issan 2022",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine-Searcher returned status 403 or block page"
+        },
+        "cellartracker": {
+          "source": "cellartracker",
+          "status": "matched",
+          "search_query": "Blason d'Issan 2022",
+          "matched_name": "2022 Château d' Issan Blason d ' Issan",
+          "matched_vintage": "2022",
+          "score": 89.6,
+          "rating_count": 14,
+          "url": "https://www.cellartracker.com/wine.asp?iWine=4641185",
+          "match_confidence": 95.0
+        },
+        "delectable": {
+          "source": "delectable",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        },
+        "falstaff": {
+          "source": "falstaff",
+          "status": "matched",
+          "search_query": "Blason d'Issan 2022",
+          "matched_name": "Château d'Issan Blason d'Issan",
+          "matched_vintage": "2022",
+          "score": 93.0,
+          "rating_count": null,
+          "url": "https://www.falstaff.com/en/wines/chateau-dissan-2022-blason-dissan",
+          "match_confidence": 95.0
+        },
+        "wine_enthusiast": {
+          "source": "wine_enthusiast",
+          "status": "blocked",
+          "search_query": "Blason d'Issan",
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null,
+          "error": "Wine Enthusiast returned status 403 or block page"
+        },
+        "wine_review_online": {
+          "source": "wine_review_online",
+          "status": "no_match",
+          "search_query": null,
+          "matched_name": null,
+          "matched_vintage": null,
+          "score": null,
+          "rating_count": null,
+          "url": null,
+          "match_confidence": null
+        }
+      },
+      "rating": {
+        "source": "vivino",
+        "status": "matched",
+        "search_query": "Blason d'Issan",
+        "matched_name": "Château d'Issan Blason d'Issan Margaux",
+        "matched_vintage": null,
+        "score": 4.1,
+        "rating_count": 13745,
+        "url": "https://www.vivino.com/en/chateau-d-issan-blason-d-issan-margaux/w/1984519",
+        "match_confidence": 90.0
+      }
+    }
+  ]
+}

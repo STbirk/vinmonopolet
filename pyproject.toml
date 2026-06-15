@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vinliste"
+version = "0.1.0"
+description = "Export Vinmonopolet red wines to JSON with best-effort Vivino ratings."
+requires-python = ">=3.10"
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "curl-cffi>=0.15",
+  "rapidfuzz>=3.9",
+  "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+vinliste = "vinliste.cli:main"
+vinliste-gui = "vinliste.gui:main"
+
+[tool.setuptools.packages.find]
+include = ["vinliste*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
