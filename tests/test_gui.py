@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from vinliste.gui import _empty_rating, _row_values, _sort_value
+from vinliste.gui import _empty_rating, _needs_rating_update, _row_values, _sort_value
 
 
 def test_row_values_extracts_table_columns() -> None:
@@ -26,12 +26,14 @@ def test_row_values_extracts_table_columns() -> None:
         "Italia",
         "Piemonte",
         310.0,
-        "4.1 (123)",
+        "",
+        "82.0 (123)",
         "no_match",
-        "91",
-        "92",
-        92,
+        "91.0",
+        "92.0",
+        88.3,
         "matched: 3, no_match: 1",
+        "Open",
     )
 
 
@@ -46,4 +48,11 @@ def test_empty_rating_is_not_requested() -> None:
 def test_sort_value_uses_numeric_rating_score() -> None:
     wine = {"ratings": {"vivino": {"score": 4.2}}}
 
-    assert _sort_value(wine, "vivino") == (0, 4.2)
+    assert _sort_value(wine, "vivino") == (0, 84.0)
+
+
+def test_missing_rating_update_skips_matched_scores() -> None:
+    wine = {"ratings": {"vivino": {"score": 4.2, "status": "matched"}}}
+
+    assert not _needs_rating_update(wine, "vivino")
+    assert _needs_rating_update(wine, "cellartracker")

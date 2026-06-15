@@ -32,7 +32,9 @@ or, after installation:
 vinliste-gui
 ```
 
-In the GUI, click any table header to sort that column. The ratings button checks Vivino, CellarTracker, Falstaff, and Wine Enthusiast with best-effort public lookups. Sources run in parallel for each wine so the window keeps reporting progress instead of looking frozen. The status line updates for each wine/source, and `Stop` keeps partial results if a run is taking too long.
+In the GUI, click any table header to sort that column. Use `Load JSON` to reopen saved exports, `Save JSON` to write the current dataset, and the price fields to filter by NOK range. Select one or more rows with Shift/Ctrl and use `Rate selected` to update only those rows. `Get missing ratings` skips sources that already have a matched score.
+
+The table supports Ctrl+C for selected rows and right-click copy for a single cell. The Vinmonopolet column opens the product page in your browser. The ratings button checks Vivino, CellarTracker, Falstaff, and Wine Enthusiast with best-effort public lookups. Scores are shown on a shared 0-100 scale, and `Best rating` is the average of matched source scores. Sources run in parallel for each wine so the window keeps reporting progress instead of looking frozen. The status line updates for each wine/source, and `Stop` keeps partial results if a run is taking too long.
 
 Useful options:
 

@@ -101,7 +101,7 @@ class VinlisteApp(tk.Tk):
 
         buttons = ttk.Frame(self, padding=(12, 0, 12, 8))
         buttons.grid(row=2, column=0, sticky="ew")
-        buttons.columnconfigure(7, weight=1)
+        buttons.columnconfigure(8, weight=1)
 
         self.scan_button = ttk.Button(
             buttons,
@@ -218,6 +218,7 @@ class VinlisteApp(tk.Tk):
         x_scroll.grid(row=1, column=0, sticky="ew")
 
         self.table.bind("<Control-c>", self.copy_selected_rows)
+        self.table.bind("<ButtonRelease-1>", self.open_link_from_event)
         self.table.bind("<Double-1>", self.open_link_from_event)
         self.table.bind("<Button-3>", self.show_table_menu)
         self.table_menu = tk.Menu(self, tearoff=False)
@@ -347,7 +348,7 @@ class VinlisteApp(tk.Tk):
                 "rating_sources": list(SOURCE_LABELS),
                 "count": len(self.wines),
             },
-            "wines": self.wines,
+            "wines": [_refresh_computed_rating_fields(wine) for wine in self.wines],
         }
         Path(path).write_text(
             json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
@@ -468,6 +469,7 @@ class VinlisteApp(tk.Tk):
                     ratings[client.source] = future.result()
                     if client.source == "vivino":
                         wine["rating"] = ratings[client.source]
+                    _refresh_computed_rating_fields(wine)
                     completed_steps += 1
                     label = SOURCE_LABELS.get(client.source, client.source)
                     self.events.put(
@@ -534,8 +536,11 @@ class VinlisteApp(tk.Tk):
                 reverse=self.sort_descending,
             )
         self.table.delete(*self.table.get_children())
-        for wine in self.wines:
-            self.table.insert("", "end", values=_row_values(wine))
+        self._table_wines = {}
+        for index, wine in enumerate(wine for wine in self.wines if self._passes_filters(wine)):
+            item_id = f"wine-{index}-{wine.get('productId') or ''}"
+            self._table_wines[item_id] = wine
+            self.table.insert("", "end", iid=item_id, values=_row_values(wine))
 
     def sort_by_column(self, column: str) -> None:
         if self.sort_column == column:
@@ -550,6 +555,9 @@ class VinlisteApp(tk.Tk):
         for button in (
             self.scan_button,
             self.rate_button,
+            self.missing_button,
+            self.selected_button,
+            self.load_button,
             self.save_button,
             self.clear_button,
         ):
@@ -581,6 +589,80 @@ class VinlisteApp(tk.Tk):
             return None
         return parsed
 
+    def _parse_optional_float(self, value: str, label: str) -> float | None:
+        value = value.strip()
+        if not value:
+            return None
+        return self._parse_float(value, label)
+
+    def _passes_filters(self, wine: dict[str, Any]) -> bool:
+        price = _price_value(wine)
+        if self.price_min_value is not None and (
+            price is None or price < self.price_min_value
+        ):
+            return False
+        if self.price_max_value is not None and (
+            price is None or price > self.price_max_value
+        ):
+            return False
+        return True
+
+    def _selected_wines(self) -> list[dict[str, Any]]:
+        return [
+            self._table_wines[item_id]
+            for item_id in self.table.selection()
+            if item_id in self._table_wines
+        ]
+
+    def copy_selected_rows(self, _event: tk.Event | None = None) -> str:
+        selected = self.table.selection()
+        if not selected:
+            return "break"
+        lines = []
+        for item_id in selected:
+            wine = self._table_wines.get(item_id)
+            if not wine:
+                continue
+            lines.append("\t".join(str(value or "") for value in _row_values(wine)))
+        if lines:
+            self.clipboard_clear()
+            self.clipboard_append("\n".join(lines))
+            self.status.set(f"Copied {len(lines)} row(s).")
+        return "break"
+
+    def show_table_menu(self, event: tk.Event) -> None:
+        item_id = self.table.identify_row(event.y)
+        column_id = self.table.identify_column(event.x)
+        if item_id and item_id not in self.table.selection():
+            self.table.selection_set(item_id)
+        self._context_cell = (item_id, column_id) if item_id and column_id else None
+        self.table_menu.tk_popup(event.x_root, event.y_root)
+
+    def copy_context_cell(self) -> None:
+        if not self._context_cell:
+            return
+        item_id, column_id = self._context_cell
+        wine = self._table_wines.get(item_id)
+        column = _column_name_from_id(self.table["columns"], column_id)
+        if not wine or not column:
+            return
+        value = _copy_value(wine, column)
+        self.clipboard_clear()
+        self.clipboard_append(str(value or ""))
+        self.status.set("Copied cell.")
+
+    def open_link_from_event(self, event: tk.Event) -> str | None:
+        item_id = self.table.identify_row(event.y)
+        column = _column_name_from_id(self.table["columns"], self.table.identify_column(event.x))
+        if column != "link":
+            return None
+        wine = self._table_wines.get(item_id)
+        url = _wine_url(wine or {})
+        if url:
+            webbrowser.open(url)
+            self.status.set(f"Opened {url}")
+        return "break"
+
 
 def _row_values(wine: dict[str, Any]) -> tuple[Any, ...]:
     price = wine.get("price") or {}
@@ -593,9 +675,11 @@ def _row_values(wine: dict[str, Any]) -> tuple[Any, ...]:
         wine.get("country"),
         wine.get("region"),
         price.get("salesPrice"),
+        _in_stock_display(wine),
         *(_rating_display(ratings.get(source)) for source in SOURCE_LABELS),
         best.get("score"),
         _status_display(ratings),
+        "Open" if _wine_url(wine) else "",
     )
 
 
@@ -616,7 +700,7 @@ def _ratings_for_wine(wine: dict[str, Any]) -> dict[str, dict[str, Any]]:
 def _rating_display(rating: dict[str, Any] | None) -> str:
     if not rating:
         return ""
-    score = rating.get("score")
+    score = normalized_rating_score(rating)
     count = rating.get("rating_count")
     if score is not None and count is not None:
         return f"{score} ({count})"
@@ -627,14 +711,14 @@ def _rating_display(rating: dict[str, Any] | None) -> str:
 
 def _status_display(ratings: dict[str, dict[str, Any]]) -> str:
     counts: dict[str, int] = {}
-    for rating in ratings.values():
+    for source in SOURCE_LABELS:
+        rating = ratings.get(source) or {}
         status = str(rating.get("status") or "unknown")
         counts[status] = counts.get(status, 0) + 1
     return ", ".join(f"{status}: {count}" for status, count in sorted(counts.items()))
 
 
 def _sort_value(wine: dict[str, Any], column: str) -> tuple[int, Any]:
-    price = wine.get("price") or {}
     ratings = _ratings_for_wine(wine)
     best = best_rating(wine)
     values = {
@@ -643,18 +727,131 @@ def _sort_value(wine: dict[str, Any], column: str) -> tuple[int, Any]:
         "vintage": wine.get("vintage"),
         "country": wine.get("country"),
         "region": wine.get("region"),
-        "price": price.get("salesPrice"),
+        "price": _price_value(wine),
+        "inStock": _in_stock_value(wine),
         "best": best.get("score"),
         "status": _status_display(ratings),
+        "link": _wine_url(wine),
     }
     for source in SOURCE_LABELS:
-        values[source] = (ratings.get(source) or {}).get("score")
+        values[source] = normalized_rating_score(ratings.get(source))
     value = values.get(column)
     if value is None:
         return (1, "")
     if isinstance(value, (int, float)):
         return (0, value)
     return (0, str(value).casefold())
+
+
+def _normalize_loaded_wine(wine: dict[str, Any]) -> dict[str, Any]:
+    normalized = dict(wine)
+    normalized["ratings"] = _ratings_for_wine(normalized)
+    normalized["rating"] = normalized["ratings"].get("vivino") or normalized.get("rating")
+    if not normalized.get("url"):
+        normalized["url"] = _wine_url(normalized)
+    if "availability" not in normalized:
+        normalized["availability"] = {
+            "inStock": _legacy_in_stock(normalized),
+            "summary": ((normalized.get("saleStatus") or {}).get("name")),
+        }
+    return _refresh_computed_rating_fields(normalized)
+
+
+def _refresh_computed_rating_fields(wine: dict[str, Any]) -> dict[str, Any]:
+    ratings = wine.get("ratings")
+    if isinstance(ratings, dict):
+        for rating in ratings.values():
+            if isinstance(rating, dict):
+                rating["score_100"] = normalized_rating_score(rating)
+    wine["bestRating"] = best_rating(wine)
+    return wine
+
+
+def _needs_rating_update(wine: dict[str, Any], source: str) -> bool:
+    rating = (_ratings_for_wine(wine).get(source) or {})
+    return rating.get("status") != "matched" or normalized_rating_score(rating) is None
+
+
+def _price_value(wine: dict[str, Any]) -> float | None:
+    price = (wine.get("price") or {}).get("salesPrice")
+    try:
+        return float(price) if price is not None else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _in_stock_display(wine: dict[str, Any]) -> str:
+    value = _in_stock_value(wine)
+    if value is True:
+        return "Yes"
+    if value is False:
+        return "No"
+    return ""
+
+
+def _in_stock_value(wine: dict[str, Any]) -> bool | None:
+    availability = wine.get("availability") or {}
+    if "inStock" in availability:
+        value = availability.get("inStock")
+        if isinstance(value, bool):
+            return value
+    return _legacy_in_stock(wine)
+
+
+def _legacy_in_stock(wine: dict[str, Any]) -> bool | None:
+    status = str((wine.get("saleStatus") or {}).get("name") or "").casefold()
+    if not status:
+        return None
+    if status in {"aktiv", "active"}:
+        return True
+    if status in {"utsolgt", "inactive", "expired"}:
+        return False
+    return None
+
+
+def _wine_url(wine: dict[str, Any]) -> str | None:
+    url = wine.get("url")
+    if url:
+        return str(url)
+    product_id = wine.get("productId")
+    if product_id:
+        return f"https://www.vinmonopolet.no/p/{product_id}"
+    return None
+
+
+def _column_name_from_id(columns: Any, column_id: str) -> str | None:
+    if not column_id.startswith("#"):
+        return None
+    try:
+        index = int(column_id[1:]) - 1
+    except ValueError:
+        return None
+    if 0 <= index < len(columns):
+        return str(columns[index])
+    return None
+
+
+def _copy_value(wine: dict[str, Any], column: str) -> Any:
+    if column == "link":
+        return _wine_url(wine)
+    values = dict(zip(_table_columns(), _row_values(wine)))
+    return values.get(column)
+
+
+def _table_columns() -> tuple[str, ...]:
+    return (
+        "productId",
+        "name",
+        "vintage",
+        "country",
+        "region",
+        "price",
+        "inStock",
+        *SOURCE_LABELS,
+        "best",
+        "status",
+        "link",
+    )
 
 
 def main() -> int:

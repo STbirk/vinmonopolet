@@ -1013,7 +1013,8 @@ def best_rating(wine: dict[str, Any]) -> dict[str, Any]:
     ratings = wine.get("ratings") or {}
     normalized_scores = [
         score
-        for rating in ratings.values()
+        for source in SOURCE_LABELS
+        for rating in [ratings.get(source)]
         if isinstance(rating, dict)
         and rating.get("status") == "matched"
         for score in [normalized_rating_score(rating)]
