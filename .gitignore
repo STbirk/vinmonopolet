@@ -4,3 +4,4 @@ __pycache__/
 *.egg-info/
 red_wines.json
 red_wines*_smoke.json
+.venv/

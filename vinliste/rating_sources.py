@@ -16,7 +16,8 @@ from .matching import select_best_match
 from .vivino import build_query, empty_rating, is_blocked_response, parse_candidates
 
 
-CACHE_VERSION = 6
+CACHE_VERSION = 7
+_MAX_SEARCH_RESULTS = 5
 
 SOURCE_LABELS = {
     "vivino": "Vivino",
@@ -25,7 +26,10 @@ SOURCE_LABELS = {
     "wine_enthusiast": "Wine Enthusiast",
 }
 
+# Vivino's own search page is rendered client-side and never contains results,
+# so web search goes first and the direct search is only a fallback.
 _DISCOVERY_FIRST_SOURCES = {
+    "vivino",
     "cellartracker",
     "falstaff",
     "wine_enthusiast",
@@ -61,6 +65,7 @@ class WebRatingClient:
         self._cache = self._load_cache()
         self._last_request_at = 0.0
         self._session = curl_requests.Session(impersonate="chrome")
+        self._duckduckgo_available = True
 
     def rate_wine(self, wine: dict[str, Any]) -> dict[str, Any]:
         blocked_or_error: dict[str, Any] | None = None
@@ -178,9 +183,10 @@ class WebRatingClient:
                 "parser_version": CACHE_VERSION,
             }
 
+        searched_web = self.source in _DISCOVERY_FIRST_SOURCES
         if self._is_blocked_response(response.status_code, response.text):
             label = SOURCE_LABELS.get(self.source, self.source)
-            web_candidates = self._search_web(query)
+            web_candidates = [] if searched_web else self._search_web(query)
             if web_candidates:
                 return {
                     "status": "ok",
@@ -197,7 +203,7 @@ class WebRatingClient:
 
         try:
             candidates = self._parse_candidates(response.text, url=url)
-            if not candidates:
+            if not candidates and not searched_web:
                 candidates = self._search_web(query)
         except Exception as exc:  # pragma: no cover - defensive against page churn.
             return {
@@ -235,36 +241,21 @@ class WebRatingClient:
         if not domain:
             return []
 
+        # Run every query form: the first one often finds only neighbouring wines,
+        # while the site-restricted form finds the exact page.
+        results: list[dict[str, str]] = []
+        seen_urls: set[str] = set()
         for search_query in _source_search_queries(self.source, query):
-            yahoo_candidates = self._search_yahoo(search_query, domain=domain)
-            if yahoo_candidates:
-                return yahoo_candidates
+            query_results = self._search_yahoo(search_query, domain=domain)
+            if not query_results:
+                query_results = self._search_duckduckgo(search_query, domain=domain)
+            for result in query_results[:3]:
+                if result["url"] not in seen_urls:
+                    seen_urls.add(result["url"])
+                    results.append(result)
 
-            duckduckgo_candidates = self._search_duckduckgo(search_query, domain=domain)
-            if duckduckgo_candidates:
-                return duckduckgo_candidates
-
-        return []
-
-    def _search_duckduckgo(self, search_query: str, *, domain: str) -> list[dict[str, Any]]:
-        search_url = "https://duckduckgo.com/html/"
-        try:
-            response = self._session.get(
-                f"{search_url}?q={quote_plus(search_query)}",
-                headers={
-                    "Accept": "text/html,application/xhtml+xml",
-                    "Accept-Language": "en-US,en;q=0.9",
-                },
-                timeout=self.timeout_seconds,
-            )
-        except RequestsError:
-            return []
-        if response.status_code != 200:
-            return []
-
-        results = parse_duckduckgo_results(response.text, domain=domain)
         candidates: list[dict[str, Any]] = []
-        for result in results[:3]:
+        for result in results[:_MAX_SEARCH_RESULTS]:
             if self.source == "cellartracker":
                 candidates.extend(parse_cellartracker_snippet(result))
             elif self.source == "vivino":
@@ -277,10 +268,10 @@ class WebRatingClient:
                     candidates.extend(self._parse_result_page(result))
         return _dedupe_candidates(candidates)
 
-    def _search_yahoo(self, query: str, *, domain: str) -> list[dict[str, Any]]:
+    def _search_yahoo(self, search_query: str, *, domain: str) -> list[dict[str, str]]:
         try:
             response = self._session.get(
-                f"https://search.yahoo.com/search?p={quote_plus(query)}",
+                f"https://search.yahoo.com/search?p={quote_plus(search_query)}",
                 headers={
                     "Accept": "text/html,application/xhtml+xml",
                     "Accept-Language": "en-US,en;q=0.9",
@@ -291,21 +282,29 @@ class WebRatingClient:
             return []
         if response.status_code != 200:
             return []
+        return parse_yahoo_results(response.text, domain=domain)
 
-        results = parse_yahoo_results(response.text, domain=domain)
-        candidates: list[dict[str, Any]] = []
-        for result in results[:3]:
-            if self.source == "cellartracker":
-                candidates.extend(parse_cellartracker_snippet(result))
-            elif self.source == "vivino":
-                candidates.extend(self._parse_vivino_result_page(result))
-            else:
-                snippet_candidates = parse_source_snippet(result, source=self.source)
-                if snippet_candidates:
-                    candidates.extend(snippet_candidates)
-                elif self.source != "wine_review_online":
-                    candidates.extend(self._parse_result_page(result))
-        return _dedupe_candidates(candidates)
+    def _search_duckduckgo(self, search_query: str, *, domain: str) -> list[dict[str, str]]:
+        # DuckDuckGo answers automated clients with a 202 challenge or a dropped
+        # connection; after the first failure, stop paying for a timeout per query.
+        if not self._duckduckgo_available:
+            return []
+        try:
+            response = self._session.get(
+                f"https://duckduckgo.com/html/?q={quote_plus(search_query)}",
+                headers={
+                    "Accept": "text/html,application/xhtml+xml",
+                    "Accept-Language": "en-US,en;q=0.9",
+                },
+                timeout=self.timeout_seconds,
+            )
+        except RequestsError:
+            self._duckduckgo_available = False
+            return []
+        if response.status_code != 200:
+            self._duckduckgo_available = False
+            return []
+        return parse_duckduckgo_results(response.text, domain=domain)
 
     def _parse_result_page(self, result: dict[str, str]) -> list[dict[str, Any]]:
         url = result.get("url")
@@ -351,7 +350,8 @@ class WebRatingClient:
     def _is_blocked_response(self, status_code: int, text: str) -> bool:
         if self.source == "vivino":
             return is_blocked_response(status_code, text)
-        if status_code in {401, 403, 429}:
+        # CellarTracker serves its bot challenge as a near-empty 202 page.
+        if status_code in {202, 401, 403, 429}:
             return True
         lowered = text[:12000].lower()
         block_markers = [
@@ -567,9 +567,11 @@ def parse_yahoo_results(html: str, *, domain: str) -> list[dict[str, str]]:
         url = _unwrap_yahoo_url(link.get("href") or "")
         if domain not in urlparse(url).netloc:
             continue
+        # The link also wraps the site name and URL breadcrumb; the page title is the <h3>.
+        heading = link.select_one("h3") or link
         results.append(
             {
-                "title": link.get_text(" ", strip=True),
+                "title": heading.get_text(" ", strip=True),
                 "url": url,
                 "snippet": snippet.get_text(" ", strip=True) if snippet else "",
             }
@@ -579,8 +581,11 @@ def parse_yahoo_results(html: str, *, domain: str) -> list[dict[str, str]]:
 
 def parse_cellartracker_snippet(result: dict[str, str]) -> list[dict[str, Any]]:
     text = result.get("snippet") or ""
+    # The name can contain periods ("Puisseguin-St. Émilion"), so it only ends at
+    # ", plus ...", a truncation ellipsis, or a period that ends the snippet.
     match = re.search(
-        r"Average of\s+(\d+(?:[.,]\d+)?)\s+points\s+in\s+([\d,]+)\s+community wine reviews?\s+on\s+(.+?)(?:,\s+plus|\.|$)",
+        r"Average of\s+(\d+(?:[.,]\d+)?)\s+points\s+in\s+([\d,]+)\s+community wine reviews?\s+on\s+"
+        r"(.+?)(?:\s*,\s+plus\b|\s*(?:\.\.\.|…)|\.?\s*$)",
         text,
         flags=re.IGNORECASE,
     )
@@ -798,7 +803,8 @@ def _source_search_queries(source: str, query: str) -> list[str]:
     if source == "cellartracker":
         raw_queries = [
             f"{query} CellarTracker rating",
-            f"site:cellartracker.com/wine.asp {query}",
+            # Yahoo returns nothing for a path-restricted site: here.
+            f"site:cellartracker.com {query}",
         ]
     elif source == "falstaff":
         raw_queries = [
@@ -987,6 +993,7 @@ def _english_country(country: Any) -> str | None:
 def _expand_abbreviations(value: str) -> str:
     value = re.sub(r"\bCh\.\s*", "Chateau ", value, flags=re.IGNORECASE)
     value = re.sub(r"\bDom\.\s*", "Domaine ", value, flags=re.IGNORECASE)
+    value = re.sub(r"\bTen\.\s*", "Tenuta ", value, flags=re.IGNORECASE)
     return re.sub(r"\s+", " ", value).strip()
 
 

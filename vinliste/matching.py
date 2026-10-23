@@ -43,6 +43,8 @@ IDENTIFIER_STOPWORDS = {
     "rouge",
     "superieur",
     "superiore",
+    "ten",
+    "tenuta",
     "the",
     "villa",
     "vin",

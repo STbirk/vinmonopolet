@@ -285,6 +285,28 @@ def test_parse_cellartracker_snippet_rejects_producer_page_summary() -> None:
     assert parse_cellartracker_snippet(result) == []
 
 
+def test_parse_cellartracker_snippet_keeps_periods_inside_name() -> None:
+    result = {
+        "title": "2001 Château Beauséjour (Puisseguin-St. Émilion) Les Hauts de ...",
+        "url": "https://www.cellartracker.com/wine.asp?iWine=4090332",
+        "snippet": (
+            "Sep 9, 2023 · Average of 88.4 points in 17 community wine reviews on "
+            "2001 Château Beauséjour (Puisseguin-St. Émilion) Les Hauts de Beauséjour , "
+            "plus professional notes, label images, wine details, and"
+        ),
+    }
+
+    assert parse_cellartracker_snippet(result) == [
+        {
+            "name": "2001 Château Beauséjour (Puisseguin-St. Émilion) Les Hauts de Beauséjour",
+            "vintage": "2001",
+            "score": 88.4,
+            "rating_count": 17,
+            "url": "https://www.cellartracker.com/wine.asp?iWine=4090332",
+        }
+    ]
+
+
 def test_parse_duckduckgo_results_unwraps_source_links() -> None:
     html = """
     <div class="result">
@@ -317,6 +339,27 @@ def test_parse_yahoo_results_unwraps_source_links() -> None:
             "snippet": "Average of 89.3 points in 11 community wine reviews on 2021 Château Fourcas Dupré.",
         }
     ]
+
+
+def test_parse_yahoo_results_ignores_site_breadcrumb_in_title() -> None:
+    html = """
+    <div class="algo">
+      <div class="compTitle">
+        <a href="https://r.search.yahoo.com/x/RU=https%3a%2f%2fwww.wineenthusiast.com%2fbuying-guide%2ffranco-conterno-2011-bussia-riserva-barolo%2f/RK=0">
+          <div><span><span>Wine Enthusiast</span>https://www.wineenthusiast.com › buying-guide › franco</span></div>
+          <h3><span>Franco Conterno 2011 Bussia Riserva Nebbiolo (Barolo)</span></h3>
+        </a>
+      </div>
+      <div class="compText">Barolo, Piedmont, Italy Rating 92 Price $60</div>
+    </div>
+    """
+
+    results = parse_yahoo_results(html, domain="wineenthusiast.com")
+
+    assert results[0]["title"] == "Franco Conterno 2011 Bussia Riserva Nebbiolo (Barolo)"
+    assert parse_wine_enthusiast_snippet(results[0])[0]["name"] == (
+        "Franco Conterno 2011 Bussia Riserva Nebbiolo (Barolo)"
+    )
 
 
 def test_parse_vivino_detail_candidates() -> None:
