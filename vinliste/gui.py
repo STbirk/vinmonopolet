@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 import queue
 import threading
 import tkinter as tk
@@ -12,6 +11,7 @@ from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 from typing import Any, Callable
 
+from .config import load_api_key
 from .rating_sources import (
     SOURCE_LABELS,
     best_rating,
@@ -37,7 +37,7 @@ class VinlisteApp(tk.Tk):
         self.events: queue.Queue[tuple[str, Any]] = queue.Queue()
         self.stop_requested = threading.Event()
 
-        self.api_key = tk.StringVar(value=os.environ.get("VINMONOPOLET_API_KEY", ""))
+        self.api_key = tk.StringVar(value=load_api_key() or "")
         self.limit = tk.StringVar(value="")
         self.delay = tk.StringVar(value="3")
         self.match_threshold = tk.StringVar(value="82")
@@ -230,7 +230,8 @@ class VinlisteApp(tk.Tk):
         if not api_key:
             messagebox.showerror(
                 "Missing API key",
-                "Enter a Vinmonopolet API key or set VINMONOPOLET_API_KEY.",
+                "Enter a Vinmonopolet API key, add it to vinliste.local.json, "
+                "or set VINMONOPOLET_API_KEY.",
             )
             return
 

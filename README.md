@@ -8,10 +8,12 @@ Export active Vinmonopolet red wines to JSON and enrich them with best-effort pu
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -e ".[dev]"
-$env:VINMONOPOLET_API_KEY = "your-regenerated-api-key"
+Copy-Item vinliste.example.json vinliste.local.json
 ```
 
-The API key is read from the environment and is never written to source or output files.
+Put your Vinmonopolet subscription keys in `vinliste.local.json` (`primary_key`, and optionally `secondary_key` as a fallback). That file is git-ignored, so the keys stay on your machine. The `VINMONOPOLET_API_KEY` environment variable, if set, takes precedence over the file.
+
+The API key is never written to source or output files.
 The CLI probes the official Product API first. If the subscription only returns sparse records, it falls back to Vinmonopolet's public product-search JSON.
 
 ## Usage

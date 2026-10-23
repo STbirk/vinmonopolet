@@ -5,3 +5,4 @@ __pycache__/
 red_wines.json
 red_wines*_smoke.json
 .venv/
+vinliste.local.json

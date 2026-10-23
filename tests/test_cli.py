@@ -36,6 +36,7 @@ def test_cli_export_writes_json_without_live_network(monkeypatch, tmp_path) -> N
 
 def test_cli_missing_api_key_returns_error(monkeypatch, tmp_path) -> None:
     monkeypatch.delenv("VINMONOPOLET_API_KEY", raising=False)
+    monkeypatch.setattr(cli, "load_api_key", lambda env_name: None)
 
     exit_code = cli.main(["export", "--output", str(tmp_path / "wines.json")])
 

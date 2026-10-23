@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .config import CONFIG_FILENAME, load_api_key
 from .exporter import build_export
 from .vinmonopolet import AutoVinmonopoletClient
 from .vivino import VivinoRatingClient
@@ -66,10 +66,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.command != "export":
         parser.error("unknown command")
 
-    api_key = os.environ.get(args.api_key_env)
+    api_key = load_api_key(args.api_key_env)
     if not api_key:
         print(
-            f"Missing Vinmonopolet API key. Set ${args.api_key_env} before running.",
+            f"Missing Vinmonopolet API key. Add it to {CONFIG_FILENAME} "
+            f"or set ${args.api_key_env} before running.",
             file=sys.stderr,
         )
         return 2
