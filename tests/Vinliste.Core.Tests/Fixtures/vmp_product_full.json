@@ -1,0 +1,188 @@
+{
+ "ageLimit": 18,
+ "allergens": "Sulfitt",
+ "bioDynamic": false,
+ "buyable": true,
+ "code": "11929001",
+ "color": "Dyp mursteinsrød.",
+ "content": {
+  "characteristics": [
+   {
+    "description": "Forteller om inntrykket av vekt og rikhet i munnen. Alkohol, tannin og glyserol (tyktflytende) bidrar til fylde. Tenk på forskjellen på skummet melk og helmelk. Fylde handler bare om struktur og munnfølelse, ikke aroma eller kvalitet.",
+    "name": "Fylde",
+    "readableValue": "Fylde, 7 av 12",
+    "value": "7"
+   },
+   {
+    "description": "Forteller hvor forfriskende syrligheten oppleves. Produktene våre inneholder ulike syrer fra råvarer og fermentering. Dette gir drikken friskhet og liv.",
+    "name": "Friskhet",
+    "readableValue": "Friskhet, 6 av 12",
+    "value": "6"
+   },
+   {
+    "description": "Garvestoffer og tannin er det samme. Dette er stoffet som gir den tørrende og snerpende følelsen på tunga og i munnhulen. Tannin kommer fra drueskall og -stein, og gir vinen struktur.",
+    "name": "Garvestoffer",
+    "readableValue": "Garvestoffer, 6 av 12",
+    "value": "6"
+   }
+  ],
+  "ingredients": [
+   {
+    "code": "065",
+    "description": "Italiensk rødvinsdrue. Gir fyldige, friske og matvennlige rødviner og er druen i chianti og brunello di montalcino fra Toscana. Aromaene minner ofte om moreller eller kirsebær, gjerne med nyanser av blomster og tørket urt. Varierende preg av fat.",
+    "formattedValue": "Brunello 100%",
+    "name": "Brunello",
+    "readableValue": "Brunello 100 prosent",
+    "type": "blue"
+   }
+  ],
+  "isGoodFor": [
+   {
+    "code": "E",
+    "name": "Storfe"
+   },
+   {
+    "code": "F",
+    "name": "Lam og sau"
+   },
+   {
+    "code": "G",
+    "name": "Småvilt"
+   }
+  ],
+  "storagePotential": {
+   "code": "Y",
+   "formattedValue": "Drikkeklar nå, men kan også lagres"
+  },
+  "style": {
+   "code": "stil001",
+   "description": "Vin som er lett til middels fyldig, leskende, god friskhet. Smak av røde bær, evt innslag av urter og blomster. Passer til lette matretter som pasta, pizza, taco og tapas.",
+   "image": {
+    "url": "https://cdn.sanity.io/images/iv1p66d7/production/1d7ea100e7098ed726fd26bcb0aaa1c80bce7347-3840x2160.jpg?w=263&auto=format"
+   },
+   "name": "Frisk og fruktig"
+  },
+  "traits": [
+   {
+    "formattedValue": "13,5%",
+    "name": "Alkohol",
+    "readableValue": "13,5 prosent"
+   },
+   {
+    "formattedValue": "Under 3 g/l",
+    "name": "Sukker",
+    "readableValue": "Under 3 gram per liter"
+   },
+   {
+    "formattedValue": "5,4 g/l",
+    "name": "Syre",
+    "readableValue": "5,4 gram per liter"
+   }
+  ]
+ },
+ "cork": "Naturkork",
+ "description": "",
+ "distributor": "Skanlog AS",
+ "distributorId": 30190,
+ "district": {
+  "code": "italia_toscana",
+  "name": "Toscana",
+  "searchQuery": ":relevance:mainDistrict:italia_toscana:mainCountry:italia",
+  "url": "/search?searchType=product&q=:relevance:mainDistrict:italia_toscana:mainCountry:italia"
+ },
+ "eco": false,
+ "environmentalPackaging": false,
+ "expired": false,
+ "fairTrade": false,
+ "gluten": false,
+ "images": [
+  {
+   "altText": "Biondi Santi Rosso di Montalcino",
+   "format": "superZoom",
+   "imageType": "PRIMARY",
+   "url": "https://bilder.vinmonopolet.no/cache/1200x1200-0/11929001-1.jpg"
+  },
+  {
+   "altText": "Biondi Santi Rosso di Montalcino",
+   "format": "zoom",
+   "imageType": "PRIMARY",
+   "url": "https://bilder.vinmonopolet.no/cache/515x515-0/11929001-1.jpg"
+  },
+  {
+   "altText": "Biondi Santi Rosso di Montalcino",
+   "format": "product",
+   "imageType": "PRIMARY",
+   "url": "https://bilder.vinmonopolet.no/cache/300x300-0/11929001-1.jpg"
+  },
+  {
+   "altText": "Biondi Santi Rosso di Montalcino",
+   "format": "thumbnail",
+   "imageType": "PRIMARY",
+   "url": "https://bilder.vinmonopolet.no/cache/96x96-0/11929001-1.jpg"
+  },
+  {
+   "altText": "Biondi Santi Rosso di Montalcino",
+   "format": "cartIcon",
+   "imageType": "PRIMARY",
+   "url": "https://bilder.vinmonopolet.no/cache/65x65-0/11929001-1.jpg"
+  }
+ ],
+ "kosher": false,
+ "litrePrice": {
+  "formattedValue": "1265,33 kr/l",
+  "readableValue": "1265 kroner og 33 øre per liter",
+  "value": 1265.33
+ },
+ "main_category": {
+  "code": "rødvin",
+  "name": "Rødvin"
+ },
+ "main_country": {
+  "code": "italia",
+  "name": "Italia",
+  "searchQuery": ":relevance:mainCountry:italia",
+  "url": "/search?searchType=product&q=:relevance:mainCountry:italia"
+ },
+ "main_producer": {
+  "code": "biondi_santi_il_greppo",
+  "name": "Biondi Santi Il Greppo",
+  "searchQuery": ":name-asc:brand:biondi_santi_il_greppo",
+  "url": "/search?searchType=product&q=:name-asc:brand:biondi_santi_il_greppo"
+ },
+ "main_wholesaler": {
+  "code": "Signature Wines AS",
+  "name": "Signature Wines AS",
+  "searchQuery": ":name-asc:mainWholesaler:Signature Wines AS",
+  "url": "/search?searchType=product&q=:name-asc:mainWholesaler:Signature+Wines+AS"
+ },
+ "method": "Tradisjonell vinifikasjon i gamle slavonske eikefat. Lagret 12 md på slovenske fat samt noe tid på flaske.",
+ "name": "Biondi Santi Rosso di Montalcino",
+ "packageType": "Glass",
+ "price": {
+  "formattedValue": "Kr 949,00",
+  "readableValue": "949 kroner",
+  "value": 949.0
+ },
+ "product_selection": "Bestillingsutvalget",
+ "releaseMode": false,
+ "similarProducts": true,
+ "smell": "Fruktdrevet med syrlige kirsebær, fiol og blyantspiss. Hint av rosa pepper og vaniljestang.",
+ "status": "aktiv",
+ "statusNotification": false,
+ "sub_District": {
+  "code": "italia_toscana_rosso_di_montalcino",
+  "name": "Rosso di Montalcino",
+  "searchQuery": ":relevance:mainSubDistrict:italia_toscana_rosso_di_montalcino:mainDistrict:italia_toscana:mainCountry:italia",
+  "url": "/search?searchType=product&q=:relevance:mainSubDistrict:italia_toscana_rosso_di_montalcino:mainDistrict:italia_toscana:mainCountry:italia"
+ },
+ "summary": "",
+ "sustainable": false,
+ "taste": "Frisk og fruktdrevet med smak av kirsebær, fiol, rosa pepper og vanilje.",
+ "url": "/Land/Italia/Toscana/Rosso-di-Montalcino/Biondi-Santi-Rosso-di-Montalcino/p/11929001",
+ "volume": {
+  "formattedValue": "75 cl",
+  "readableValue": "75 centiliter",
+  "value": 75.0
+ },
+ "year": "2022"
+}

@@ -1,0 +1,54 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Parchment, bordeaux and cork. -->
+    <Color x:Key="PrimaryColor">#5B1A2A</Color>
+    <Color x:Key="AccentColor">#8E2C3F</Color>
+
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FBF7F2" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="SurfaceAltBrush" Color="#F6EFE9" />
+    <SolidColorBrush x:Key="SurfaceRoseBrush" Color="#F6E8EB" />
+    <SolidColorBrush x:Key="SurfaceHoverBrush" Color="#F3E7E2" />
+    <SolidColorBrush x:Key="SelectionBrush" Color="#F0DCE1" />
+    <SolidColorBrush x:Key="BorderBrush" Color="#E8DCD3" />
+    <SolidColorBrush x:Key="BorderStrongBrush" Color="#D6C3B8" />
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#2B1A20" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#7A6168" />
+    <SolidColorBrush x:Key="TextMutedBrush" Color="#806A73" />
+    <!-- Headings and the hero price: bordeaux in light mode, a lighter wine red in dark mode for contrast. -->
+    <SolidColorBrush x:Key="HeadingBrush" Color="#5B1A2A" />
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#5B1A2A" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#712337" />
+    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="#45121F" />
+    <SolidColorBrush x:Key="OnPrimaryBrush" Color="#FFF8F2" />
+    <SolidColorBrush x:Key="AccentBrush" Color="#8E2C3F" />
+    <SolidColorBrush x:Key="AccentSoftBrush" Color="#F3E3E6" />
+    <SolidColorBrush x:Key="CorkBrush" Color="#C8A97E" />
+    <SolidColorBrush x:Key="CorkSoftBrush" Color="#F2E8DA" />
+    <SolidColorBrush x:Key="GoldBrush" Color="#A87A24" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="#3F7D5A" />
+    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#E3F0E8" />
+    <SolidColorBrush x:Key="WarningBrush" Color="#B9781F" />
+    <SolidColorBrush x:Key="DangerBrush" Color="#B23A48" />
+    <SolidColorBrush x:Key="ScoreHighBrush" Color="#5B1A2A" />
+    <SolidColorBrush x:Key="ScoreMidBrush" Color="#93384C" />
+    <SolidColorBrush x:Key="ScoreLowBrush" Color="#8E7680" />
+
+    <LinearGradientBrush x:Key="NavBackgroundBrush" StartPoint="0,0" EndPoint="0.4,1">
+        <GradientStop Offset="0" Color="#4A1422" />
+        <GradientStop Offset="1" Color="#2A0B14" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="NavTextBrush" Color="#F5E6E9" />
+    <SolidColorBrush x:Key="NavTextMutedBrush" Color="#C9A9B1" />
+    <SolidColorBrush x:Key="NavSelectedBrush" Color="#33FFFFFF" />
+    <SolidColorBrush x:Key="NavHoverBrush" Color="#1AFFFFFF" />
+
+    <LinearGradientBrush x:Key="HeroBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#F6E8EB" />
+        <GradientStop Offset="1" Color="#F2E8DA" />
+    </LinearGradientBrush>
+
+    <Color x:Key="ShadowColor">#5B1A2A</Color>
+    <Color x:Key="CaptionColor">#2A0B14</Color>
+    <Color x:Key="CaptionTextColor">#F5E6E9</Color>
+</ResourceDictionary>

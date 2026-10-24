@@ -1,0 +1,250 @@
+{
+ "betweenStoresMessage": "Vi gjør oppmerksom på at vi ikke sender varer mellom våre butikker.",
+ "pagination": {
+  "currentPage": 0,
+  "pageSize": 10,
+  "totalPages": 1,
+  "totalResults": 8
+ },
+ "stores": [
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "Wdm. Thranes gate 72, 0175, Oslo",
+     "id": "8800324485143",
+     "line1": "Wdm. Thranes gate 72",
+     "line2": "Wdm. Thranes gate 72",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "0175",
+     "town": "Oslo"
+    },
+    "displayName": "Oslo, Kiellandsplass",
+    "formattedDistance": "2,0 km",
+    "geoPoint": {
+     "latitude": 59.92821,
+     "longitude": 10.7505016327
+    },
+    "id": "178",
+    "name": "178"
+   },
+   "stockInfo": {
+    "stockLevel": 2
+   }
+  },
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "Karenslyst alle 58, 0277, Oslo",
+     "id": "8800320389143",
+     "line1": "Karenslyst alle 58",
+     "line2": "Karenslyst alle 58",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "0277",
+     "town": "Oslo"
+    },
+    "displayName": "Oslo, Skøyen",
+    "formattedDistance": "4,2 km",
+    "geoPoint": {
+     "latitude": 59.9211216,
+     "longitude": 10.677531
+    },
+    "id": "393",
+    "name": "393"
+   },
+   "stockInfo": {
+    "stockLevel": 12
+   }
+  },
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "Slemdalsveien 70A, 0370, Oslo",
+     "id": "8800286048279",
+     "line1": "Slemdalsveien 70A",
+     "line2": "Slemdalsveien 70A",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "0370",
+     "town": "Oslo"
+    },
+    "displayName": "Oslo, Vinderen",
+    "formattedDistance": "4,4 km",
+    "geoPoint": {
+     "latitude": 59.9421870311,
+     "longitude": 10.704102
+    },
+    "id": "454",
+    "name": "454"
+   },
+   "stockInfo": {
+    "stockLevel": 8
+   }
+  },
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "Lilleakerveien 16, 0283, Oslo",
+     "id": "8800325533719",
+     "line1": "Lilleakerveien 16",
+     "line2": "Lilleakerveien 16",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "0283",
+     "town": "Oslo"
+    },
+    "displayName": "Oslo, CC Vest",
+    "formattedDistance": "6,4 km",
+    "geoPoint": {
+     "latitude": 59.9176495,
+     "longitude": 10.636359
+    },
+    "id": "127",
+    "name": "127"
+   },
+   "stockInfo": {
+    "stockLevel": 9
+   }
+  },
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "Snarøyaveien 55, 1364, Fornebu",
+     "id": "8863183405079",
+     "line1": "Snarøyaveien 55",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "1364",
+     "town": "Fornebu"
+    },
+    "displayName": "Bærum, Fornebu",
+    "formattedDistance": "7,5 km",
+    "geoPoint": {
+     "latitude": 59.8935172,
+     "longitude": 10.6207561
+    },
+    "id": "442",
+    "name": "442"
+   },
+   "stockInfo": {
+    "stockLevel": 6
+   }
+  },
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "Storgata 62, 2609, Lillehammer",
+     "id": "8800323141655",
+     "line1": "Storgata 62",
+     "line2": "Storgata 62",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "2609",
+     "town": "Lillehammer"
+    },
+    "displayName": "Lillehammer",
+    "formattedDistance": "135,2 km",
+    "geoPoint": {
+     "latitude": 61.1152335,
+     "longitude": 10.4658186
+    },
+    "id": "263",
+    "name": "263"
+   },
+   "stockInfo": {
+    "stockLevel": 8
+   }
+  },
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "Averøyveien 24, 6530, Averøy",
+     "id": "8800322125847",
+     "line1": "Averøyveien 24",
+     "line2": "ABC senteret",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "6530",
+     "town": "Averøy"
+    },
+    "displayName": "Bruhagen",
+    "formattedDistance": "387,5 km",
+    "geoPoint": {
+     "latitude": 63.0521,
+     "longitude": 7.6312
+    },
+    "id": "420",
+    "name": "420"
+   },
+   "stockInfo": {
+    "stockLevel": 3
+   }
+  },
+  {
+   "pointOfService": {
+    "address": {
+     "defaultAddress": false,
+     "formattedAddress": "City Lade, Haakon VII's gt. 9, 7041, Trondheim",
+     "id": "8800287293463",
+     "line1": "City Lade, Haakon VII's gt. 9",
+     "line2": "City Lade, Haakon VI'gt. 9",
+     "phone": "22 01 50 00",
+     "phoneCountry": {
+      "isocode": "NO",
+      "name": "Norge",
+      "phonePrefix": "+47"
+     },
+     "postalCode": "7041",
+     "town": "Trondheim"
+    },
+    "displayName": "Trondheim, Lade",
+    "formattedDistance": "394,1 km",
+    "geoPoint": {
+     "latitude": 63.4433483,
+     "longitude": 10.4478454
+    },
+    "id": "336",
+    "name": "336"
+   },
+   "stockInfo": {
+    "stockLevel": 1
+   }
+  }
+ ]
+}

@@ -1,0 +1,169 @@
+{
+ "pagination": {
+  "currentPage": 0,
+  "pageSize": 2,
+  "sort": "relevance",
+  "totalPages": 6780,
+  "totalResults": 13560
+ },
+ "products": [
+  {
+   "alcohol": {
+    "formattedValue": "13,5%",
+    "readableValue": "13,5 prosent",
+    "value": 13.5
+   },
+   "buyable": true,
+   "code": "11929001",
+   "district": {
+    "code": "italia_toscana",
+    "name": "Toscana"
+   },
+   "expired": false,
+   "images": [
+    {
+     "format": "thumbnail",
+     "imageType": "PRIMARY",
+     "url": "https://bilder.vinmonopolet.no/cache/96x96-0/11929001-1.jpg"
+    },
+    {
+     "format": "product",
+     "imageType": "PRIMARY",
+     "url": "https://bilder.vinmonopolet.no/cache/300x300-0/11929001-1.jpg"
+    }
+   ],
+   "main_category": {
+    "code": "rødvin",
+    "name": "Rødvin"
+   },
+   "main_country": {
+    "code": "italia",
+    "name": "Italia"
+   },
+   "main_sub_category": {},
+   "name": "Biondi Santi Rosso di Montalcino",
+   "price": {
+    "formattedValue": "Kr 949,00",
+    "readableValue": "949 kroner",
+    "value": 949.0
+   },
+   "productAvailability": {
+    "deliveryAvailability": {
+     "availableForPurchase": true,
+     "infos": [
+      {
+       "availability": "Kan bestilles",
+       "location": "Post/Levering",
+       "readableValue": "Post/Levering: Kan bestilles"
+      }
+     ],
+     "openStockLocator": false
+    },
+    "storesAvailability": {
+     "availableForPurchase": true,
+     "infoAvailabilityAllStores": "Vis butikker med varen på lager",
+     "infos": [
+      {
+       "availability": "Kan bestilles til alle butikker",
+       "readableValue": "Kan bestilles til alle butikker"
+      }
+     ],
+     "openStockLocator": true
+    }
+   },
+   "product_selection": "Bestillingsutvalget",
+   "releaseMode": false,
+   "status": "aktiv",
+   "sub_District": {
+    "code": "italia_toscana_rosso_di_montalcino",
+    "name": "Rosso di Montalcino"
+   },
+   "sustainable": false,
+   "url": "/Land/Italia/Toscana/Rosso-di-Montalcino/Biondi-Santi-Rosso-di-Montalcino/p/11929001",
+   "volume": {
+    "formattedValue": "75 cl",
+    "readableValue": "75 centiliter",
+    "value": 75.0
+   }
+  },
+  {
+   "alcohol": {
+    "formattedValue": "14,7%",
+    "readableValue": "14,7 prosent",
+    "value": 14.7
+   },
+   "buyable": true,
+   "code": "11422205",
+   "district": {
+    "code": "usa_california",
+    "name": "California"
+   },
+   "expired": false,
+   "images": [
+    {
+     "format": "thumbnail",
+     "imageType": "PRIMARY",
+     "url": "https://bilder.vinmonopolet.no/cache/96x96-0/11422205-1.jpg"
+    },
+    {
+     "format": "product",
+     "imageType": "PRIMARY",
+     "url": "https://bilder.vinmonopolet.no/cache/300x300-0/11422205-1.jpg"
+    }
+   ],
+   "main_category": {
+    "code": "rødvin",
+    "name": "Rødvin"
+   },
+   "main_country": {
+    "code": "usa",
+    "name": "USA"
+   },
+   "main_sub_category": {},
+   "name": "Hendry Cabernet Sauvignon",
+   "price": {
+    "formattedValue": "Kr 1 967,30",
+    "readableValue": "1967 kroner og 30 øre",
+    "value": 1967.3
+   },
+   "productAvailability": {
+    "deliveryAvailability": {
+     "availableForPurchase": true,
+     "infos": [
+      {
+       "availability": "Kan bestilles",
+       "location": "Post/Levering",
+       "readableValue": "Post/Levering: Kan bestilles"
+      }
+     ],
+     "openStockLocator": false
+    },
+    "storesAvailability": {
+     "availableForPurchase": true,
+     "infoAvailabilityAllStores": "Ikke på lager i noen butikker",
+     "infos": [
+      {
+       "availability": "Kan bestilles til alle butikker",
+       "readableValue": "Kan bestilles til alle butikker"
+      }
+     ],
+     "openStockLocator": false
+    }
+   },
+   "product_selection": "Bestillingsutvalget",
+   "releaseMode": false,
+   "status": "aktiv",
+   "sub_District": {
+    "code": "usa_california_napa_valley",
+    "name": "Napa Valley"
+   },
+   "sustainable": false,
+   "url": "/Land/USA/California/Napa-Valley/Hendry-Cabernet-Sauvignon/p/11422205",
+   "volume": {
+    "formattedValue": "150 cl",
+    "readableValue": "150 centiliter",
+    "value": 150.0
+   }
+  }
+ ]
+}

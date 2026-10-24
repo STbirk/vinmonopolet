@@ -1,54 +1,77 @@
 # Vinliste
 
-Export active Vinmonopolet red wines to JSON and enrich them with best-effort public ratings.
+A Windows app for exploring Vinmonopolet's wine range with ratings from the web. It keeps
+a local catalogue of every wine Vinmonopolet sells (red, white, rosé, sparkling,
+semi-sparkling, fortified, aromatised and fruit wine), updates it with one click, and
+collects scores from Vivino, CellarTracker, Falstaff and Wine Enthusiast.
 
-## Setup
+![Vinliste](src/Vinliste.App/Assets/vinliste-256.png)
+
+## What it does
+
+- **One-click catalogue update.** Reads about 27,000 wines from vinmonopolet.no into a local
+  SQLite database. Runs in the background, can be stopped, and continues where it stopped.
+  It records new wines, price changes (with history) and wines that disappear.
+- **Wine details.** Tasting notes (colour, smell, taste), fullness/freshness/tannins/
+  sweetness/bitterness, grapes, food pairings, storage potential, method, closure,
+  packaging, producer, importer and certifications (organic, biodynamic, vegan …).
+  Fetched when you open a wine, or in bulk with **Get details**.
+- **Stock per store.** **Check stock** lists every store that has the wine, nearest first,
+  with your favourite store on top.
+- **Ratings.** **Find ratings** (one wine) or **Rate selected / Rate listed** (many) search
+  each site and match carefully: producer, vintage, colour and wine-specific words such as
+  the cuvée name, Riserva or a second-wine name must agree. Vivino scores are per vintage
+  where available. **Best rating** is the average of the matched scores on a 0–100 scale.
+- **Browse.** Search by name, producer, grape, district or item number; filter by wine
+  type, country, price and minimum score; sort by score, value for money, price, litre
+  price, vintage, newest arrivals or biggest price drop. Favourites, notes, **New arrivals**
+  and **Price drops** views. Export the list to CSV (Excel) or JSON.
+- Light and dark themes.
+
+## Requirements
+
+- Windows 10 (1809) or later
+- [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0) (included if
+  you publish self-contained, see below)
+- Microsoft Edge WebView2 Runtime (preinstalled on Windows 11; used to read rating sites
+  that block plain downloads)
+
+## Build and run
+
+With the .NET 8 SDK installed:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -e ".[dev]"
-Copy-Item vinliste.example.json vinliste.local.json
+dotnet build Vinliste.sln
+dotnet test Vinliste.sln
+dotnet run --project src/Vinliste.App
 ```
 
-Put your Vinmonopolet subscription keys in `vinliste.local.json` (`primary_key`, and optionally `secondary_key` as a fallback). That file is git-ignored, so the keys stay on your machine. The `VINMONOPOLET_API_KEY` environment variable, if set, takes precedence over the file.
-
-The API key is never written to source or output files.
-The CLI probes the official Product API first. If the subscription only returns sparse records, it falls back to Vinmonopolet's public product-search JSON.
-
-## Usage
+To make a single `Vinliste.exe` that runs without installing .NET:
 
 ```powershell
-python -m vinliste export --output red_wines.json --rating-source vivino --match-threshold 82 --delay 3 --verbose
+dotnet publish src/Vinliste.App -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -o publish
 ```
 
-Launch the GUI with:
+## Where data is stored
 
-```powershell
-python -m vinliste.gui
+Everything lives in `%LOCALAPPDATA%\Vinliste`: the database (`vinliste.db`), settings
+(`settings.json`) and the WebView2 browser cache. **Settings → Open data folder** opens it.
+Set the environment variable `VINLISTE_DATA_DIR` to use another folder (handy for testing).
+
+No API key is needed: the app reads Vinmonopolet's public website data, which includes
+more detail than the open API (tasting notes and stock per store).
+
+## Project layout
+
 ```
-
-or, after installation:
-
-```powershell
-vinliste-gui
+src/Vinliste.Core/          Models, SQLite database, Vinmonopolet client and sync, rating engine
+src/Vinliste.App/           WPF app (MVVM): views, view models, themes, WebView2 fetcher
+tests/Vinliste.Core.Tests/  xUnit tests (no network access needed)
+docs/design.md              Design notes: data sources, schema, update strategy, matching rules
 ```
-
-In the GUI, click any table header to sort that column. Use `Load JSON` to reopen saved exports, `Save JSON` to write the current dataset, and the price fields to filter by NOK range. Select one or more rows with Shift/Ctrl and use `Rate selected` to update only those rows. `Get missing ratings` skips sources that already have a matched score.
-
-The table supports Ctrl+C for selected rows and right-click copy for a single cell. The Vinmonopolet column opens the product page in your browser. The ratings button checks Vivino, CellarTracker, Falstaff, and Wine Enthusiast with best-effort public lookups. Scores are shown on a shared 0-100 scale, and `Best rating` is the average of matched source scores. Sources run in parallel for each wine so the window keeps reporting progress instead of looking frozen. The status line updates for each wine/source, and `Stop` keeps partial results if a run is taking too long.
-
-Useful options:
-
-- `--output`: JSON file path.
-- `--api-key-env`: environment variable containing the Vinmonopolet API key. Defaults to `VINMONOPOLET_API_KEY`.
-- `--rating-source`: `vivino` or `none`.
-- `--match-threshold`: minimum fuzzy match confidence for Vivino matches.
-- `--limit`: limit exported red wines for smoke tests.
-- `--delay`: delay between Vivino requests.
-- `--cache`: Vivino cache path. Defaults to `.cache/vivino_ratings.json`.
-- `--verbose`: print progress.
 
 ## Notes
 
-Rating lookup is best-effort. If a source blocks, requires login, or shows a captcha, the exporter records the rating status and still keeps the Vinmonopolet product and price data.
+Rating lookups are best effort and go through web search, so they are polite and slow
+(roughly 15–40 seconds per wine across all four sites). Results are cached: a matched
+score is reused for 90 days, "not found" for 30 days, and failures are retried the next day.
