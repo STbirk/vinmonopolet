@@ -26,6 +26,11 @@
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
   </ItemGroup>
 
+  <!-- Starter catalogue (built with tools/Vinliste.SeedBuilder); installed on first start. -->
+  <ItemGroup Condition="Exists('Seed\vinliste-seed.db.gz')">
+    <EmbeddedResource Include="Seed\vinliste-seed.db.gz" LogicalName="vinliste-seed.db.gz" />
+  </ItemGroup>
+
   <ItemGroup>
     <Resource Include="Assets\vinliste.ico" />
     <Resource Include="Assets\vinliste-256.png" />

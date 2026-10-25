@@ -20,6 +20,19 @@
 
             <Border Style="{StaticResource Card}" Margin="0,0,0,16">
                 <StackPanel>
+                    <TextBlock Text="Keeping up to date" Style="{StaticResource SectionTitle}" />
+                    <CheckBox Style="{StaticResource Switch}" Content="Check Vinmonopolet for changes in the background"
+                              IsChecked="{Binding BackgroundUpdates}" />
+                    <TextBlock Style="{StaticResource CaptionText}" Margin="44,4,0,10"
+                               Text="While Vinliste is open it reads Vinmonopolet's wine list one page at a time, picking up new wines, price changes and availability. Progress is saved after every page, so closing the app loses nothing. “Update now” in the sidebar does a full pass at full speed instead." />
+                    <ComboBox ItemsSource="{Binding PaceOptions}" SelectedItem="{Binding SelectedPace}" DisplayMemberPath="Label"
+                              Width="360" HorizontalAlignment="Left" Margin="44,0,0,0"
+                              IsEnabled="{Binding BackgroundUpdates}" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                <StackPanel>
                     <TextBlock Text="My store" Style="{StaticResource SectionTitle}" />
                     <TextBlock Text="{Binding StoresHint}" Style="{StaticResource CaptionText}" Margin="0,0,0,10" />
                     <ComboBox ItemsSource="{Binding Stores}" SelectedItem="{Binding FavoriteStore}" Width="360" HorizontalAlignment="Left"

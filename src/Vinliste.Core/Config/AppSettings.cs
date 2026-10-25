@@ -27,6 +27,12 @@ public sealed class AppSettings
     public double MatchThreshold { get; set; } = 82;
     public int RequestDelayMs { get; set; } = 300;
     public string Theme { get; set; } = "Light";
+
+    /// <summary>Keep the catalogue up to date slowly while the app is open.</summary>
+    public bool BackgroundUpdates { get; set; } = true;
+
+    /// <summary>Seconds between listing pages for background updates (one page per minute by default).</summary>
+    public int BackgroundPageDelaySeconds { get; set; } = 60;
     public List<string> EnabledRatingSources { get; set; } = ["vivino", "cellartracker", "falstaff", "wine_enthusiast"];
 
     public static AppSettings Load(string? path = null)

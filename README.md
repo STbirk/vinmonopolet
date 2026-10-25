@@ -9,9 +9,13 @@ collects scores from Vivino, CellarTracker, Falstaff and Wine Enthusiast.
 
 ## What it does
 
-- **One-click catalogue update.** Reads about 27,000 wines from vinmonopolet.no into a local
-  SQLite database. Runs in the background, can be stopped, and continues where it stopped.
-  It records new wines, price changes (with history) and wines that disappear.
+- **Ready from the first start.** The app ships with a starter catalogue of Vinmonopolet's
+  whole wine range, installed on first start, so there is no initial scan to wait for.
+- **Keeps itself up to date.** While the app is open it reads Vinmonopolet's list slowly in the
+  background (one page a minute by default, a full pass in about 19 hours of app time) and
+  saves progress after every page. **Update now** does a full pass at full speed (15–25
+  minutes) instead. Both record new wines, price changes (with history) and wines that
+  disappear.
 - **Wine details.** Tasting notes (colour, smell, taste), fullness/freshness/tannins/
   sweetness/bitterness, grapes, food pairings, storage potential, method, closure,
   packaging, producer, importer and certifications (organic, biodynamic, vegan …).
@@ -52,6 +56,16 @@ To make a single `Vinliste.exe` that runs without installing .NET:
 dotnet publish src/Vinliste.App -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -o publish
 ```
 
+### Refreshing the starter catalogue
+
+The bundled catalogue is `src/Vinliste.App/Seed/vinliste-seed.db.gz`. To rebuild it from the
+live site (a full fast update, 15–25 minutes; `--details N` also fetches tasting notes for N
+wines):
+
+```powershell
+dotnet run --project tools/Vinliste.SeedBuilder -- src/Vinliste.App/Seed/vinliste-seed.db.gz
+```
+
 ## Where data is stored
 
 Everything lives in `%LOCALAPPDATA%\Vinliste`: the database (`vinliste.db`), settings
@@ -65,7 +79,8 @@ more detail than the open API (tasting notes and stock per store).
 
 ```
 src/Vinliste.Core/          Models, SQLite database, Vinmonopolet client and sync, rating engine
-src/Vinliste.App/           WPF app (MVVM): views, view models, themes, WebView2 fetcher
+src/Vinliste.App/           WPF app (MVVM): views, view models, themes, WebView2 fetcher, starter catalogue
+tools/Vinliste.SeedBuilder/ Builds the starter catalogue from the live site
 tests/Vinliste.Core.Tests/  xUnit tests (no network access needed)
 docs/design.md              Design notes: data sources, schema, update strategy, matching rules
 ```

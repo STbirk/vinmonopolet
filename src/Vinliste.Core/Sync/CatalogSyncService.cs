@@ -12,6 +12,17 @@ public sealed record SyncProgress(string Stage, int Done, int Total, string Mess
 
 public sealed record CatalogSyncResult(string Status, int ProductsSeen, int ProductsNew, int PriceChanges, int Delisted, string? Error);
 
+/// <summary>How a catalogue run is paced.</summary>
+/// <param name="PageDelay">Pause before each listing page (zero for a fast, user-started update).</param>
+/// <param name="ResumeMaxAge">
+/// How old an unfinished run may be and still be resumed from its cursor. Slow background runs
+/// span days of app time; the two-run delisting rule absorbs the catalogue shifting meanwhile.
+/// </param>
+public sealed record CatalogSyncOptions(TimeSpan PageDelay, TimeSpan ResumeMaxAge)
+{
+    public static readonly CatalogSyncOptions Fast = new(TimeSpan.Zero, TimeSpan.FromDays(7));
+}
+
 /// <summary>
 /// Pages through every wine category listing and upserts the catalogue. Progress is
 /// persisted after each page, so a cancelled or crashed run resumes where it stopped.
@@ -23,30 +34,36 @@ public sealed class CatalogSyncService(WineRepository repository, VinmonopoletCl
     /// <summary>A category is only delisted from when this run saw at least this share of its active wines.</summary>
     private const double MinSeenShareForDelisting = 0.8;
 
-    // One catalogue run at a time per process: two loops resuming the same run row would corrupt it.
-    private static readonly SemaphoreSlim RunGate = new(1, 1);
+    // One catalogue run at a time per database: two loops resuming the same run row would corrupt it.
+    // Keyed by file so every service instance on the same database shares the lock.
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, SemaphoreSlim> RunGates =
+        new(StringComparer.OrdinalIgnoreCase);
+
+    private SemaphoreSlim RunGate => RunGates.GetOrAdd(Path.GetFullPath(repository.Database.Path), _ => new SemaphoreSlim(1, 1));
 
     private sealed record Cursor(
         int CategoryIndex,
         int Page,
         Dictionary<string, int> PagesPerCategory,
         Dictionary<string, int>? SeenPerCategory = null,
-        List<string>? IncompleteCategories = null);
+        List<string>? IncompleteCategories = null,
+        DateTimeOffset? LastPageAt = null);
 
-    public static bool IsRunning => RunGate.CurrentCount == 0;
+    public bool IsRunning => RunGate.CurrentCount == 0;
 
     public async Task<CatalogSyncResult> RunAsync(
         IReadOnlyList<WineCategory>? categories,
         IProgress<SyncProgress>? progress,
-        CancellationToken ct)
+        CancellationToken ct,
+        CatalogSyncOptions? options = null)
     {
         if (!await RunGate.WaitAsync(0, CancellationToken.None).ConfigureAwait(false))
         {
-            return new CatalogSyncResult(SyncRunStatus.Failed, 0, 0, 0, 0, "A catalogue update is already running.");
+            return new CatalogSyncResult(SyncRunStatus.Failed, 0, 0, 0, 0, AlreadyRunning);
         }
         try
         {
-            return await RunCoreAsync(categories ?? WineCategories.All, progress, ct).ConfigureAwait(false);
+            return await RunCoreAsync(categories ?? WineCategories.All, progress, ct, options ?? CatalogSyncOptions.Fast).ConfigureAwait(false);
         }
         finally
         {
@@ -54,16 +71,23 @@ public sealed class CatalogSyncService(WineRepository repository, VinmonopoletCl
         }
     }
 
-    private async Task<CatalogSyncResult> RunCoreAsync(IReadOnlyList<WineCategory> categories, IProgress<SyncProgress>? progress, CancellationToken ct)
+    public const string AlreadyRunning = "A catalogue update is already running.";
+
+    private async Task<CatalogSyncResult> RunCoreAsync(
+        IReadOnlyList<WineCategory> categories, IProgress<SyncProgress>? progress, CancellationToken ct, CatalogSyncOptions options)
     {
-        var run = repository.GetResumableRun(Kind);
-        var cursor = run?.CursorJson is { } json ? JsonSerializer.Deserialize<Cursor>(json) : null;
+        var unfinished = repository.GetResumableRun(Kind, TimeSpan.MaxValue);
+        var cursor = unfinished?.CursorJson is { } json ? JsonSerializer.Deserialize<Cursor>(json) : null;
+        // Age counts from the last page saved, not the run's start: someone who opens the app a
+        // few minutes a day still finishes a slow pass, it just takes longer.
+        var lastProgress = cursor?.LastPageAt ?? unfinished?.StartedAt;
+        var run = unfinished is not null && DateTimeOffset.UtcNow - lastProgress <= options.ResumeMaxAge ? unfinished : null;
         if (run is null || cursor is null || !cursor.PagesPerCategory.Keys.SequenceEqual(categories.Select(c => c.Code)))
         {
-            if (run is not null)
+            if (unfinished is not null)
             {
                 // An unfinished run we will not resume (too old, other categories): close it.
-                repository.UpdateRun(run with { Status = SyncRunStatus.Failed, FinishedAt = DateTimeOffset.UtcNow, Error = "Superseded by a new run" });
+                repository.UpdateRun(unfinished with { Status = SyncRunStatus.Failed, FinishedAt = DateTimeOffset.UtcNow, Error = "Superseded by a new run" });
             }
             run = null;
             cursor = null;
@@ -81,7 +105,7 @@ public sealed class CatalogSyncService(WineRepository repository, VinmonopoletCl
                     pages[categories[i].Code] = Math.Max(1, first.TotalPages);
                     progress?.Report(new SyncProgress("Counting", i + 1, categories.Count, $"{categories[i].Name}: {first.TotalResults:N0} products"));
                 }
-                cursor = new Cursor(0, 0, pages, [], []);
+                cursor = new Cursor(0, 0, pages, [], [], DateTimeOffset.UtcNow);
                 run = repository.StartRun(Kind, pages.Values.Sum(), JsonSerializer.Serialize(cursor));
             }
             else
@@ -112,6 +136,10 @@ public sealed class CatalogSyncService(WineRepository repository, VinmonopoletCl
                 for (var page = startPage; page < categoryPages; page++)
                 {
                     ct.ThrowIfCancellationRequested();
+                    if (options.PageDelay > TimeSpan.Zero)
+                    {
+                        await Task.Delay(options.PageDelay, ct).ConfigureAwait(false);
+                    }
                     var listing = await client.GetListingPageAsync(category.Code, page, ct).ConfigureAwait(false);
                     if (listing.TotalPages > categoryPages)
                     {
@@ -133,8 +161,8 @@ public sealed class CatalogSyncService(WineRepository repository, VinmonopoletCl
 
                     var done = PagesBefore(cursor, categories, ci) + page + 1;
                     var next = page + 1 < categoryPages && !endedEarly
-                        ? new Cursor(ci, page + 1, cursor.PagesPerCategory, seenPerCategory, incomplete)
-                        : new Cursor(ci + 1, 0, cursor.PagesPerCategory, seenPerCategory, incomplete);
+                        ? new Cursor(ci, page + 1, cursor.PagesPerCategory, seenPerCategory, incomplete, DateTimeOffset.UtcNow)
+                        : new Cursor(ci + 1, 0, cursor.PagesPerCategory, seenPerCategory, incomplete, DateTimeOffset.UtcNow);
                     run = run with
                     {
                         PagesDone = done,

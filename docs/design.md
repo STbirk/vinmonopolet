@@ -39,12 +39,26 @@ per store), so an API key setting would only add configuration without adding da
 
 ### Update strategy
 
+- **Starter catalogue.** The app embeds a gzipped database built by
+  `tools/Vinliste.SeedBuilder` (a full fast catalogue run, compacted). On start,
+  `SeedDatabase.InstallIfNeeded` writes it to the data folder when there is no
+  database or the database has no wines; an existing catalogue is never touched.
+  The seed includes its completed `sync_runs` row, so "New arrivals" counts wines
+  first seen after the seed and delisting has a previous run to compare with.
+- **Background updates** (`BackgroundCatalogUpdater`, on by default, Settings →
+  Keeping up to date): while the app is open, the normal resumable catalogue run
+  goes on with a pause before every listing page (default 60 s; ~1,150 pages ≈ 19
+  hours of app time per pass), and a new pass starts when one completes. Unfinished
+  passes resume for up to 7 days. A failed pass waits 10 minutes. "Update now"
+  stops the background loop, continues the same run at full speed, then restarts
+  the loop.
+
 - **Catalogue update** (one click, background, resumable, ~15–25 min for a full
   run, progress + cancel): page through every category listing (sorted by name
   for stable paging) and upsert products. Record a price-history row whenever
   the price changes and first/last-seen timestamps so "new wines" and "price
   drops" can be shown. An unfinished run resumes from its page cursor if it is
-  less than 6 hours old; older runs restart.
+  less than 7 days old; older runs are closed and a new one starts.
 - **Delisting** is deliberately cautious, because offset paging can skip a wine
   when the catalogue shifts during a run, and the site sometimes returns an empty
   page: a wine is delisted only when it was missing from this run *and* the

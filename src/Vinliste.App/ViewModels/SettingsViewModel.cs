@@ -30,6 +30,18 @@ public sealed partial class SettingsViewModel(AppServices services, Action setti
         new("wine_enthusiast", "Wine Enthusiast", "Critic scores from the Wine Enthusiast buying guide (100 points)."),
     ];
 
+    public sealed record PaceOption(string Label, int Seconds);
+
+    public IReadOnlyList<PaceOption> PaceOptions { get; } =
+    [
+        new("One page every 30 seconds (a full pass in ~10 hours)", 30),
+        new("One page a minute (a full pass in ~19 hours)", 60),
+        new("One page every 2 minutes (a full pass in ~2 days)", 120),
+        new("One page every 5 minutes (a full pass in ~4 days)", 300),
+    ];
+
+    [ObservableProperty] private bool _backgroundUpdates;
+    [ObservableProperty] private PaceOption? _selectedPace;
     [ObservableProperty] private bool _isDarkTheme;
     [ObservableProperty] private double _matchThreshold = 82;
     [ObservableProperty] private Store? _favoriteStore;
@@ -62,6 +74,8 @@ public sealed partial class SettingsViewModel(AppServices services, Action setti
     {
         var settings = services.Settings;
         IsDarkTheme = settings.Theme == "Dark";
+        BackgroundUpdates = settings.BackgroundUpdates;
+        SelectedPace = PaceOptions.MinBy(o => Math.Abs(o.Seconds - settings.BackgroundPageDelaySeconds));
         MatchThreshold = settings.MatchThreshold;
         Latitude = settings.Latitude?.ToString(CultureInfo.InvariantCulture) ?? "";
         Longitude = settings.Longitude?.ToString(CultureInfo.InvariantCulture) ?? "";
@@ -113,8 +127,11 @@ public sealed partial class SettingsViewModel(AppServices services, Action setti
         settings.Latitude = ParseCoordinate(Latitude);
         settings.Longitude = ParseCoordinate(Longitude);
         settings.EnabledRatingSources = Sources.Where(s => s.IsEnabled).Select(s => s.Id).ToList();
+        settings.BackgroundUpdates = BackgroundUpdates;
+        settings.BackgroundPageDelaySeconds = SelectedPace?.Seconds ?? 60;
         services.SaveSettings();
         services.RebuildRatings();
+        _ = services.ApplyBackgroundSettingsAsync();
         settingsChanged();
         SavedMessage = $"Saved {DateTime.Now:t}";
     }

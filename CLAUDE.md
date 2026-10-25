@@ -18,6 +18,7 @@ dotnet test tests/Vinliste.Core.Tests --filter "FullyQualifiedName~WineMatcherTe
 dotnet test tests/Vinliste.Core.Tests --filter "DisplayName~Riserva"                   # one test by name
 dotnet run --project src/Vinliste.App
 dotnet publish src/Vinliste.App -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -o publish
+dotnet run --project tools/Vinliste.SeedBuilder -- src/Vinliste.App/Seed/vinliste-seed.db.gz   # rebuild starter catalogue (live, 15–25 min)
 ```
 
 When another process (or a running Vinliste.exe) holds the build output, build with a separate
@@ -59,9 +60,16 @@ Timestamps are stored as fixed-format UTC ISO strings and compared as strings.
 
 ### Catalogue sync (`CatalogSyncService`)
 Counts pages per category, then pages through them, persisting a JSON cursor after every page so a
-cancelled or failed run resumes (only if under 6 h old). Delisting is deliberately cautious: only wines
-missing from this run and the previous completed one, only in categories paged to the end without an
-empty page, and only if at least 80% of the category was seen. One run at a time per process.
+cancelled or failed run resumes (if under `CatalogSyncOptions.ResumeMaxAge`, 7 days). Delisting is
+deliberately cautious: only wines missing from this run and the previous completed one, only in
+categories paged to the end without an empty page, and only if at least 80% of the category was seen.
+One run at a time per process (`RunGate`).
+
+`BackgroundCatalogUpdater` runs that same service in a loop while the app is open, with
+`CatalogSyncOptions.PageDelay` (default 60 s) before each page. "Update now" stops the loop, continues
+the same run cursor at full speed, then restarts it. First start installs the bundled starter
+catalogue (`SeedDatabase.InstallIfNeeded`, embedded `src/Vinliste.App/Seed/vinliste-seed.db.gz`, built
+by `tools/Vinliste.SeedBuilder`); it never overwrites a database that has wines.
 
 ### Rating engine (`Ratings/`)
 `WebSearchRatingSource` runs site-restricted Yahoo searches (a second phrasing only if the first gives
@@ -95,3 +103,6 @@ lookup survive refreshes; `ReplaceRow` updates one row in place. Long work goes 
   `VINLISTE_SNAPSHOT_PAGE=<AllWines|Favorites|NewArrivals|PriceDrops|Settings>`,
   `VINLISTE_SNAPSHOT_RATE=1` and `VINLISTE_SNAPSHOT_EXIT=1` drive it. The theme comes from
   `settings.json` in the data folder.
+- Every app start begins background updates against the live site; put
+  `"BackgroundUpdates": false` in that `settings.json` when a run should stay offline. An empty
+  data folder gets the starter catalogue installed on start.

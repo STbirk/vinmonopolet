@@ -87,7 +87,30 @@ public sealed partial class MainViewModel : ObservableObject
         LoadCountries();
         UpdateStats();
         Refresh();
+
+        // Background updates report from a worker thread; show them on the UI thread.
+        var dispatcher = Dispatcher.CurrentDispatcher;
+        services.Background.StatusChanged += (_, status) => dispatcher.BeginInvoke(() =>
+        {
+            BackgroundText = status.Message;
+            IsBackgroundActive = status.IsActive;
+            if (status.LastPageAt is not null)
+            {
+                UpdateStats();
+            }
+        });
+        services.Background.PassCompleted += (_, _) => dispatcher.BeginInvoke(AfterJob);
+        if (services.SeedInstalled)
+        {
+            Job.Message = services.Settings.BackgroundUpdates
+                ? "Welcome! The wine list is preinstalled and keeps itself up to date while Vinliste is open."
+                : "Welcome! The wine list is preinstalled. Click “Update now” to bring it up to date.";
+        }
+        _ = services.ApplyBackgroundSettingsAsync();
     }
+
+    [ObservableProperty] private string _backgroundText = "";
+    [ObservableProperty] private bool _isBackgroundActive;
 
     public JobViewModel Job { get; }
     public SettingsViewModel Settings { get; }
@@ -285,7 +308,21 @@ public sealed partial class MainViewModel : ObservableObject
     {
         Job.TryStart("Catalogue update", async (progress, ct) =>
         {
-            var result = await _services.Catalog.RunAsync(null, progress, ct);
+            // The fast update takes over the slow background pass (it continues the same run),
+            // and hands back to it afterwards.
+            await _services.Background.StopAsync("Paused while “Update now” runs");
+            CatalogSyncResult result;
+            try
+            {
+                result = await _services.Catalog.RunAsync(null, progress, ct);
+            }
+            finally
+            {
+                if (_services.Settings.BackgroundUpdates)
+                {
+                    _services.Background.Start();
+                }
+            }
             return result.Status switch
             {
                 SyncRunStatus.Completed => $"Catalogue updated · {result.ProductsSeen:N0} wines · {result.ProductsNew:N0} new · {result.PriceChanges:N0} price changes · {result.Delisted:N0} gone",
@@ -417,7 +454,7 @@ public sealed partial class MainViewModel : ObservableObject
         StatsText = stats.Total == 0
             ? "Catalogue is empty"
             : $"{stats.Active:N0} wines · {stats.WithRatings:N0} rated\n{stats.WithDetails:N0} with details"
-              + (stats.LastSync is null ? "" : $"\nUpdated {stats.LastSync.Value.LocalDateTime:d}");
+              + (stats.LastSync is null ? "" : $"\nFull pass {stats.LastSync.Value.LocalDateTime:d}");
     }
 
     private static double? ParsePrice(string text) =>

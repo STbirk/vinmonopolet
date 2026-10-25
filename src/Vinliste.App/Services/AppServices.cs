@@ -18,6 +18,9 @@ public sealed class AppServices : IDisposable
     public AppServices(Dispatcher dispatcher)
     {
         Settings = AppSettings.Load();
+        // First start: begin from the bundled catalogue instead of an empty list.
+        SeedInstalled = SeedDatabase.InstallIfNeeded(AppPaths.DatabasePath,
+            () => typeof(AppServices).Assembly.GetManifestResourceStream("vinliste-seed.db.gz"));
         Repository = new WineRepository(new VinlisteDatabase(AppPaths.DatabasePath));
         _http = new HttpClientFetcher();
         // Search failures are recorded and retried next run; long retry loops would stall every source.
@@ -27,8 +30,16 @@ public sealed class AppServices : IDisposable
         Catalog = new CatalogSyncService(Repository, Vinmonopolet);
         Details = new DetailsSyncService(Repository, Vinmonopolet);
         Stock = new StockService(Repository, Vinmonopolet);
+        Background = new BackgroundCatalogUpdater(Catalog, BackgroundPageDelay);
         RebuildRatings();
     }
+
+    /// <summary>True when this start installed the bundled starter catalogue.</summary>
+    public bool SeedInstalled { get; }
+
+    public BackgroundCatalogUpdater Background { get; }
+
+    public TimeSpan BackgroundPageDelay => TimeSpan.FromSeconds(Math.Clamp(Settings.BackgroundPageDelaySeconds, 10, 3600));
 
     public AppSettings Settings { get; }
     public WineRepository Repository { get; }
@@ -49,8 +60,13 @@ public sealed class AppServices : IDisposable
 
     public void SaveSettings() => Settings.Save();
 
+    /// <summary>Starts, stops or re-paces background updates to match the settings.</summary>
+    public Task ApplyBackgroundSettingsAsync() => Background.RestartAsync(Settings.BackgroundUpdates, BackgroundPageDelay);
+
     public void Dispose()
     {
+        // Each page is saved as it arrives, so stopping only cancels the wait for the next one.
+        Background.StopAsync().Wait(TimeSpan.FromSeconds(5));
         _browser.Dispose();
         _search.Dispose();
         _http.Dispose();

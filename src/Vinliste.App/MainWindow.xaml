@@ -84,15 +84,34 @@
                     <Border Margin="14,26,14,0" Padding="14" CornerRadius="10" Background="#1FFFFFFF">
                         <StackPanel>
                             <TextBlock Text="Catalogue" FontWeight="SemiBold" Foreground="{DynamicResource NavTextBrush}" />
-                            <TextBlock Text="{Binding StatsText}" FontSize="11" Margin="0,4,0,10" TextWrapping="Wrap"
+                            <TextBlock Text="{Binding StatsText}" FontSize="11" Margin="0,4,0,8" TextWrapping="Wrap"
                                        Foreground="{DynamicResource NavTextMutedBrush}" />
+                            <!-- Background update status: a softly pulsing dot while it works. -->
+                            <DockPanel Margin="0,0,0,10" Visibility="{Binding BackgroundText, Converter={StaticResource VisibleWhen}}">
+                                <Ellipse DockPanel.Dock="Left" Width="7" Height="7" Margin="0,4,7,0" VerticalAlignment="Top"
+                                         Fill="{DynamicResource CorkBrush}"
+                                         Visibility="{Binding IsBackgroundActive, Converter={StaticResource VisibleWhen}}">
+                                    <Ellipse.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.25" Duration="0:0:1.4" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Ellipse.Triggers>
+                                </Ellipse>
+                                <TextBlock Text="{Binding BackgroundText}" FontSize="10.5" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource NavTextMutedBrush}"
+                                           ToolTip="While Vinliste is open it checks Vinmonopolet slowly in the background (one page a minute by default), so the list stays current without you doing anything." />
+                            </DockPanel>
                             <Button Command="{Binding UpdateCatalogCommand}" HorizontalAlignment="Stretch"
                                     IsEnabled="{Binding Job.IsBusy, Converter={StaticResource InverseBool}}"
                                     Background="{DynamicResource CorkBrush}" BorderBrush="{DynamicResource CorkBrush}" Foreground="#2A0B14"
-                                    FontWeight="SemiBold" ToolTip="Fetch the latest wines, prices and availability from Vinmonopolet. Resumes if interrupted.">
+                                    FontWeight="SemiBold" ToolTip="Fetch all changes now at full speed (15–25 minutes) instead of waiting for the background updates.">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Style="{StaticResource IconText}" Text="&#xE72C;" Margin="0,0,8,0" FontSize="12" />
-                                    <TextBlock Text="Update wine list" />
+                                    <TextBlock Text="Update now" />
                                 </StackPanel>
                             </Button>
                         </StackPanel>
