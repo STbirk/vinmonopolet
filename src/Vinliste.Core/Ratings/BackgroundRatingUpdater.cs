@@ -125,10 +125,18 @@ public sealed class BackgroundRatingUpdater(
 
     private static string Describe(RatingResult r) => r.Status switch
     {
-        RatingStatus.Matched => $"{r.Source,-15} {(r.Source == "vivino" ? $"{r.Score:0.0} ★" : $"{r.Score:0.#} pts")}  {r.MatchedName}",
-        RatingStatus.MatchedNoScore => $"{r.Source,-15} found, no score yet  {r.MatchedName}",
-        RatingStatus.NoMatch => $"{r.Source,-15} not found",
+        RatingStatus.Matched => $"{r.Source,-15} {(r.Source == "vivino" ? $"{r.Score:0.0} ★" : $"{r.Score:0.#} pts")}  {r.MatchedName}{How(r)}",
+        RatingStatus.MatchedNoScore => $"{r.Source,-15} found, no score yet  {r.MatchedName}{How(r)}",
+        RatingStatus.NoMatch => $"{r.Source,-15} not found{How(r)}",
         RatingStatus.Blocked => $"{r.Source,-15} blocked by the site",
         _ => $"{r.Source,-15} error: {FirstLine(r.Error)}",
+    };
+
+    /// <summary>Says when a result needed no search: copied from another bottle size, or a remembered page.</summary>
+    private static string How(RatingResult r) => r.SearchQuery switch
+    {
+        { } q when q.StartsWith(RatingService.SharedPrefix, StringComparison.Ordinal) => "  (same wine, other bottle size)",
+        { } q when q.StartsWith("remembered page", StringComparison.Ordinal) => "  (remembered from another vintage)",
+        _ => "",
     };
 }

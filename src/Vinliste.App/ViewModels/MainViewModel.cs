@@ -111,12 +111,16 @@ public sealed partial class MainViewModel : ObservableObject
         // A wine rated in the background: update its row (score badge) and an open detail pane.
         services.BackgroundRatings.WineRated += (_, code) => dispatcher.BeginInvoke(() =>
         {
-            if (_services.Repository.GetWine(code) is { } row)
+            // The other bottle sizes of the wine received the same ratings.
+            foreach (var changed in _services.Repository.GetSiblingCodes(code).Prepend(code))
             {
-                ReplaceRow(row);
-                if (Detail?.Row.Code == code)
+                if (_services.Repository.GetWine(changed) is { } row)
                 {
-                    Detail.Reload();
+                    ReplaceRow(row);
+                    if (Detail?.Row.Code == changed)
+                    {
+                        Detail.Reload();
+                    }
                 }
             }
         });

@@ -29,19 +29,45 @@ public sealed class RatingService(WineRepository repository, IReadOnlyList<IRati
         CategoryCode = wine.CategoryCode,
     };
 
-    /// <summary>Rates one wine with every source in parallel. Fresh stored results are reused unless <paramref name="force"/>.</summary>
+    /// <summary>Marks a result copied from the same wine in another bottle size (in <see cref="RatingResult.SearchQuery"/>).</summary>
+    public const string SharedPrefix = "shared from ";
+
+    /// <summary>
+    /// Rates one wine with every source in parallel. Fresh stored results are reused unless
+    /// <paramref name="force"/>; so are fresh results for the same wine in another bottle size.
+    /// A source that matched the wine in another vintage gets that match as a hint. New results
+    /// are shared with the other bottle sizes.
+    /// </summary>
     public async Task<IReadOnlyList<RatingResult>> RateAsync(string code, bool force, CancellationToken ct, IReadOnlyCollection<string>? onlySources = null)
     {
         var wine = repository.GetWine(code) ?? throw new InvalidOperationException($"Wine {code} is not in the catalogue.");
         var identity = IdentityFor(wine, repository.GetDetails(code));
         var existing = repository.GetRatings(code).ToDictionary(r => r.Source);
-
-        var tasks = sources
+        var due = sources
             .Where(s => onlySources is null || onlySources.Contains(s.Id))
-            .Where(s => force || !existing.TryGetValue(s.Id, out var stored) || DateTimeOffset.UtcNow - stored.FetchedAt > MaxAge(stored.Status))
-            .Select(source => RateWithSourceAsync(source, identity, ct));
+            .Where(s => force || !existing.TryGetValue(s.Id, out var stored) || !IsFresh(stored))
+            .ToList();
 
-        foreach (var result in await Task.WhenAll(tasks).ConfigureAwait(false))
+        // The same wine in another bottle size, checked recently: copy instead of searching again.
+        var siblings = repository.GetSiblingCodes(code);
+        var siblingResults = siblings.SelectMany(repository.GetRatings).Where(r => IsShareable(r) && IsFresh(r)).ToList();
+        var toLookUp = new List<IRatingSource>();
+        foreach (var source in due)
+        {
+            var shared = force ? null : siblingResults.Where(r => r.Source == source.Id).MaxBy(r => r.FetchedAt);
+            if (shared is not null)
+            {
+                repository.SaveRating(shared with { Code = code, SearchQuery = SharedPrefix + shared.Code });
+            }
+            else
+            {
+                toLookUp.Add(source);
+            }
+        }
+
+        var lookups = toLookUp.Select(source => RateWithSourceAsync(source, identity, repository.FindRatingLink(code, source.Id), ct));
+        var saved = new List<RatingResult>();
+        foreach (var result in await Task.WhenAll(lookups).ConfigureAwait(false))
         {
             // A transient failure must not wipe a score we already have; the match is kept
             // and the source is asked again after its normal refresh interval.
@@ -51,9 +77,42 @@ public sealed class RatingService(WineRepository repository, IReadOnlyList<IRati
                 continue;
             }
             repository.SaveRating(result);
+            saved.Add(result);
         }
+
+        ShareWithSiblings(code, siblings, saved.Where(IsShareable));
         return repository.GetRatings(code);
     }
+
+    /// <summary>Copies new results to the other bottle sizes, without replacing a newer result or a match with a non-match.</summary>
+    private void ShareWithSiblings(string code, IReadOnlyList<string> siblings, IEnumerable<RatingResult> results)
+    {
+        var list = results.ToList();
+        if (list.Count == 0)
+        {
+            return;
+        }
+        foreach (var sibling in siblings)
+        {
+            var theirs = repository.GetRatings(sibling).ToDictionary(r => r.Source);
+            foreach (var result in list)
+            {
+                if (theirs.TryGetValue(result.Source, out var current)
+                    && (current.FetchedAt >= result.FetchedAt
+                        || (current.Status == RatingStatus.Matched && result.Status != RatingStatus.Matched && IsFresh(current))))
+                {
+                    continue;
+                }
+                repository.SaveRating(result with { Code = sibling, SearchQuery = SharedPrefix + code });
+            }
+        }
+    }
+
+    private static bool IsFresh(RatingResult result) => DateTimeOffset.UtcNow - result.FetchedAt <= MaxAge(result.Status);
+
+    /// <summary>Results that say something about the wine itself; errors and blocks only describe one attempt.</summary>
+    private static bool IsShareable(RatingResult result) =>
+        result.Status is RatingStatus.Matched or RatingStatus.MatchedNoScore or RatingStatus.NoMatch;
 
     /// <summary>Rates many wines, two at a time, reporting progress per wine.</summary>
     public async Task<int> RunAsync(IReadOnlyList<string> codes, bool missingOnly, IProgress<SyncProgress>? progress, CancellationToken ct)
@@ -97,12 +156,12 @@ public sealed class RatingService(WineRepository repository, IReadOnlyList<IRati
         return matched;
     }
 
-    private async Task<RatingResult> RateWithSourceAsync(IRatingSource source, WineIdentity wine, CancellationToken ct)
+    private async Task<RatingResult> RateWithSourceAsync(IRatingSource source, WineIdentity wine, RatingResult? hint, CancellationToken ct)
     {
         SourceLookup lookup;
         try
         {
-            lookup = await source.LookupAsync(wine, matchThreshold, ct).ConfigureAwait(false);
+            lookup = await source.LookupAsync(wine, matchThreshold, ct, hint).ConfigureAwait(false);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested)
         {

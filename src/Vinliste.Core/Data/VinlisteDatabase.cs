@@ -146,6 +146,11 @@ public sealed class VinlisteDatabase
             value TEXT
         );
         """,
+        // 2: the same wine regardless of bottle size and vintage (filled in by C#, see BackfillCuveeKeys).
+        """
+        ALTER TABLE wines ADD COLUMN cuvee_key TEXT;
+        CREATE INDEX ix_wines_cuvee ON wines(cuvee_key, vintage);
+        """,
     ];
 
     public VinlisteDatabase(string path)
@@ -210,5 +215,45 @@ public sealed class VinlisteDatabase
             command.ExecuteNonQuery();
             transaction.Commit();
         }
+        BackfillCuveeKeys(connection);
+    }
+
+    /// <summary>
+    /// The key that groups bottle sizes and vintages of one wine: its name without volume and
+    /// year, plus its category. Computed in C# (accent folding, abbreviations), so rows from before
+    /// migration 2 (or a starter catalogue built earlier) get it here.
+    /// </summary>
+    public static string CuveeKey(string name, string? categoryCode) =>
+        $"{Ratings.WineText.Normalize(Ratings.WineText.ExpandAbbreviations(name))}|{categoryCode}";
+
+    private static void BackfillCuveeKeys(SqliteConnection connection)
+    {
+        var rows = new List<(string Code, string Name, string? Category)>();
+        using (var select = connection.CreateCommand())
+        {
+            select.CommandText = "SELECT code, name, category_code FROM wines WHERE cuvee_key IS NULL";
+            using var reader = select.ExecuteReader();
+            while (reader.Read())
+            {
+                rows.Add((reader.GetString(0), reader.GetString(1), reader.IsDBNull(2) ? null : reader.GetString(2)));
+            }
+        }
+        if (rows.Count == 0)
+        {
+            return;
+        }
+        using var transaction = connection.BeginTransaction();
+        using var update = connection.CreateCommand();
+        update.Transaction = transaction;
+        update.CommandText = "UPDATE wines SET cuvee_key = $key WHERE code = $code";
+        var key = update.Parameters.Add("$key", SqliteType.Text);
+        var code = update.Parameters.Add("$code", SqliteType.Text);
+        foreach (var row in rows)
+        {
+            key.Value = CuveeKey(row.Name, row.Category);
+            code.Value = row.Code;
+            update.ExecuteNonQuery();
+        }
+        transaction.Commit();
     }
 }

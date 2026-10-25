@@ -196,14 +196,18 @@ public static partial class VinmonopoletParser
         return doc.RootElement.GetPropertyOrDefault("pagination").GetInt("totalPages") ?? 1;
     }
 
+    /// <summary>
+    /// The vintage in a Vinmonopolet product name. Names end with the vintage, so the last year
+    /// wins: "Abtei #1937 Riesling Trocken 2023" is a 2023, not a 1937.
+    /// </summary>
     public static string? ExtractVintage(string? value)
     {
         if (string.IsNullOrEmpty(value))
         {
             return null;
         }
-        var match = VintageRegex().Match(value);
-        return match.Success ? match.Groups[1].Value : null;
+        var matches = VintageRegex().Matches(value);
+        return matches.Count > 0 ? matches[^1].Groups[1].Value : null;
     }
 
     private static string? AvailabilitySummary(JsonElement delivery, JsonElement stores)

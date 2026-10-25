@@ -86,6 +86,11 @@ at most 3 result pages otherwise. `RatingService` runs sources in parallel per w
 status (matched 90 d, no match 30 d, error/blocked 1 d) and never lets a transient error overwrite a
 stored match.
 
+`RatingService.RateAsync` also works across products of the same wine: siblings (same
+`wines.cuvee_key` and vintage, i.e. other bottle sizes) share results, and `FindRatingLink` hands a
+source its earlier match from another vintage as a `hint` (Vivino reopens that page with `?year=`).
+`cuvee_key` comes from `VinlisteDatabase.CuveeKey` and is backfilled in C# after migrations.
+
 `WineMatcher` decides "same wine". It is intentionally strict, and `RatingTests.cs` pins real-world
 cases (second wines, Riserva vs normale, cru/cuvée siblings, owner-as-producer, colour, NV). Key rules:
 all producer words that appear in the Vinmonopolet name must appear; vintage, colour and cuvée numbers
@@ -114,6 +119,8 @@ lookup survive refreshes; `ReplaceRow` updates one row in place. Long work goes 
 - Every app start begins background catalogue updates and background ratings against the live
   sites; put `"BackgroundUpdates": false, "BackgroundRatings": false` in that `settings.json`
   when a run should stay offline.
+- `VINLISTE_DUMP_DIR=<folder>` saves every page the app fetches (including the hidden WebView2
+  browser's), to check parsers against exactly what the app received.
 - When checking rating accuracy live, use a fresh database: a failed lookup keeps the previously
   stored match, so a reused database can show matches even when every search failed. An empty
   data folder gets the starter catalogue installed on start.

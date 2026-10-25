@@ -154,6 +154,20 @@ Improvements over the Python version:
 - **Caching and refresh.** Results are cached in the `ratings` table with
   `fetched_at`; a match is refreshed after 90 days, "no match" after 30 days,
   errors/blocked after 1 day. A transient error never overwrites a stored match.
+- **Same wine, other bottle sizes.** `wines.cuvee_key` (migration 2; the name without
+  volume and year, folded, plus the category; filled in by C#) groups a wine's bottle
+  sizes and vintages. Products with the same key, country and vintage are siblings (two
+  products without a vintage only once both have saved product details, since a missing
+  year usually means "not stated"; a failed page fetch does not count): a fresh
+  result for one is copied to the others instead of searching again, and new results
+  are shared with them (marked "shared from <code>"), never replacing a newer result
+  or a match with a non-match. Errors and blocks are not shared.
+- **Matches remembered across vintages.** `FindRatingLink` finds how a source last
+  matched the same `cuvee_key` in another product. It is passed to the source as a
+  hint: Vivino opens that wine page for the new vintage directly (`?year=`, no
+  search); every source also first searches with the name the site itself used.
+- **Bracketed text** in a site's wine name (Wine Enthusiast puts the appellation in
+  brackets) counts toward name similarity but never as an "extra word".
 - **Background ratings** (`BackgroundRatingUpdater`, on by default): one wine per
   interval (default 5 minutes) while the app is open. `WineRepository.NextWineForRating`
   picks available wines (or favourites) never checked or checked more than 30 days

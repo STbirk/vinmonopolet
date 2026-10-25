@@ -32,6 +32,8 @@ collects scores from Vivino, CellarTracker, Falstaff and Wine Enthusiast.
   each site and match carefully: producer, vintage, colour and wine-specific words such as
   the cuvée name, Riserva or a second-wine name must agree. Vivino scores are per vintage
   where available. **Best rating** is the average of the matched scores on a 0–100 scale.
+  A wine rated once gets the same scores for its other bottle sizes, and a match found for one
+  vintage is reused to look up the next vintage directly.
 - **Browse.** Search by name, producer, grape, district or item number; filter by wine
   type, country, price and minimum score; sort by score, value for money, price, litre
   price, vintage, newest arrivals or biggest price drop. Favourites, notes, **New arrivals**

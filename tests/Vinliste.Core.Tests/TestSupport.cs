@@ -75,6 +75,7 @@ internal static class Wines
     {
         Code = code,
         Name = name,
+        Vintage = Vinliste.Core.Vinmonopolet.VinmonopoletParser.ExtractVintage(name),
         CategoryCode = category,
         Category = category,
         Country = "Italia",

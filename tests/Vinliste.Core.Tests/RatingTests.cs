@@ -168,6 +168,22 @@ public class WineMatcherTests
     }
 
     [Fact]
+    public void Bracketed_appellation_counts_towards_the_name()
+    {
+        // Wine Enthusiast titles: found live, rejected at 58% while the appellation in brackets was dropped.
+        var montosoli = Wine("Altesino Brunello di Montalcino Montosoli 2019", "Altesino") with { CategoryCode = "rødvin" };
+        var normale = Wine("Altesino Brunello di Montalcino 2019", "Altesino") with { CategoryCode = "rødvin" };
+        var montosoliReview = Candidate("Altesino 2019 Vigna Montosoli Sangiovese (Brunello di Montalcino)");
+        var normaleReview = Candidate("Altesino 2019 Sangiovese (Brunello di Montalcino)");
+
+        Assert.True(WineMatcher.Score(montosoli, montosoliReview) >= 95);
+        Assert.True(WineMatcher.Score(normale, normaleReview) >= 95);
+        // The siblings still do not cross.
+        Assert.True(WineMatcher.Score(montosoli, normaleReview) is null or < 82);
+        Assert.True(WineMatcher.Score(normale, montosoliReview) is null or < 82);
+    }
+
+    [Fact]
     public void Grape_names_reveal_colour_when_no_colour_word_is_given()
     {
         // Found live: Wine Enthusiast's Pinot Noir from the same château was accepted for the white.
@@ -245,6 +261,17 @@ public class WineMatcherTests
         var scored = Candidate("Ressia Gepu Langhe Nebbiolo", score: 3.9);
 
         Assert.Same(scored, WineMatcher.BestMatch(wine, [unscored, scored], 82)!.Candidate);
+    }
+
+    [Fact]
+    public void Barrel_sample_ranks_below_the_finished_wine_review()
+    {
+        var wine = Wine("Ch. La Mission Haut-Brion 2018", "Château La Mission Haut-Brion");
+        var barrel = Candidate("Château La Mission Haut-Brion 2018 Barrel Sample", score: 96);
+        var finished = Candidate("Château La Mission Haut-Brion 2018", score: 94);
+
+        Assert.Same(finished, WineMatcher.BestMatch(wine, [barrel, finished], 82)!.Candidate);
+        Assert.NotNull(WineMatcher.BestMatch(wine, [barrel], 82));
     }
 }
 
@@ -393,6 +420,21 @@ public class RatingParserTests
     }
 
     [Fact]
+    public void JsonLd_decodes_html_entities_in_names()
+    {
+        const string html = """
+            <script type="application/ld+json">
+            {"@type":"Product","name":"Bader-Mimeur 2020 Chassagne-Montrachet &amp; Clos du Château",
+             "review":{"@type":"Review","reviewRating":{"ratingValue":"92","bestRating":"100"}}}
+            </script>
+            """;
+
+        var candidate = Assert.Single(RatingParsers.ParseJsonLd(html, "https://www.wineenthusiast.com/buying-guide/x/"));
+
+        Assert.Equal("Bader-Mimeur 2020 Chassagne-Montrachet & Clos du Château", candidate.Name);
+    }
+
+    [Fact]
     public void Vivino_page_gives_vintage_rating_and_all_vintages_fallback()
     {
         const string props = """
@@ -437,11 +479,137 @@ public class RatingServiceTests
         public string Label => id;
         public double ToScore100(double score) => score <= 5 ? score * 20 : score;
 
-        public Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct)
+        public RatingResult? LastHint { get; private set; }
+
+        public Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct, RatingResult? hint = null)
         {
             Calls++;
+            LastHint = hint;
             return Task.FromResult(lookup(wine));
         }
+    }
+
+    [Fact]
+    public async Task Bottle_sizes_of_the_same_wine_share_ratings()
+    {
+        using var db = new TempDatabase();
+        db.Repository.UpsertListings(
+        [
+            Wines.Listing("75", "Aldo Conterno Barolo Bussia Cicala 2020"),
+            Wines.Listing("150", "Aldo Conterno Barolo Bussia Cicala 2020") with { VolumeCl = 150 },
+            Wines.Listing("5l", "Aldo Conterno Barolo Bussia Cicala 5l 2020") with { VolumeCl = 500 },
+            Wines.Listing("2019", "Aldo Conterno Barolo Bussia Cicala 2019"),
+        ], DateTimeOffset.UtcNow);
+        var vivino = new FakeSource("vivino", _ => new SourceLookup([new RatingCandidate { Name = "Aldo Conterno Barolo Bussia Cicala 2020", Vintage = "2020", Score = 4.4 }], "q"));
+        var service = new RatingService(db.Repository, [vivino]);
+
+        await service.RateAsync("75", force: false, CancellationToken.None);
+
+        // Rated once; both other sizes have it straight away, the other vintage does not.
+        Assert.Equal(1, vivino.Calls);
+        Assert.Equal(88, db.Repository.GetWine("150")!.BestScore);
+        Assert.Equal(88, db.Repository.GetWine("5l")!.BestScore);
+        Assert.Null(db.Repository.GetWine("2019")!.BestScore);
+        Assert.StartsWith(RatingService.SharedPrefix, db.Repository.GetRatings("5l").Single().SearchQuery);
+
+        // Rating a sibling later reuses the fresh result instead of searching.
+        db.Repository.SaveRating(db.Repository.GetRatings("150").Single() with { FetchedAt = DateTimeOffset.UtcNow.AddDays(-200) });
+        await service.RateAsync("150", force: false, CancellationToken.None);
+        Assert.Equal(1, vivino.Calls);
+    }
+
+    [Fact]
+    public void Same_name_from_another_country_or_without_a_known_vintage_is_not_a_sibling()
+    {
+        using var db = new TempDatabase();
+        db.Repository.UpsertListings(
+        [
+            // Found in the real catalogue: two different "Farmers Market" wines, Spanish and Italian.
+            Wines.Listing("es", "Farmers Market") with { Country = "Spania" },
+            Wines.Listing("it", "Farmers Market") with { Country = "Italia" },
+            // Same name, no year in either listing: probably different vintages until details say otherwise.
+            Wines.Listing("a", "Ch. Cantemerle") with { Country = "Frankrike" },
+            Wines.Listing("b", "Ch. Cantemerle") with { Country = "Frankrike", VolumeCl = 150 },
+        ], DateTimeOffset.UtcNow);
+
+        Assert.Empty(db.Repository.GetSiblingCodes("es"));
+        Assert.Empty(db.Repository.GetSiblingCodes("a"));
+
+        // Product pages that could not be read say nothing about the vintage.
+        db.Repository.MarkDetailsUnavailable("a", DateTimeOffset.UtcNow);
+        db.Repository.MarkDetailsUnavailable("b", DateTimeOffset.UtcNow);
+        Assert.Empty(db.Repository.GetSiblingCodes("a"));
+
+        // Both product pages read and still no vintage: a non-vintage wine in two sizes.
+        db.Repository.SaveDetails(new WineDetails { Code = "a" }, DateTimeOffset.UtcNow);
+        db.Repository.SaveDetails(new WineDetails { Code = "b" }, DateTimeOffset.UtcNow);
+        Assert.Equal(["b"], db.Repository.GetSiblingCodes("a"));
+    }
+
+    [Fact]
+    public async Task Bottle_sizes_that_turn_out_to_be_different_vintages_share_nothing()
+    {
+        using var db = new TempDatabase();
+        db.Repository.UpsertListings(
+        [
+            Wines.Listing("75", "Ressia Gepu Langhe Nebbiolo"),
+            Wines.Listing("150", "Ressia Gepu Langhe Nebbiolo") with { VolumeCl = 150 },
+            Wines.Listing("300", "Ressia Gepu Langhe Nebbiolo") with { VolumeCl = 300 },
+        ], DateTimeOffset.UtcNow);
+        // The listing names had no year; the product pages give the magnum another vintage.
+        db.Repository.SaveDetails(new WineDetails { Code = "75", Vintage = "2021" }, DateTimeOffset.UtcNow);
+        db.Repository.SaveDetails(new WineDetails { Code = "150", Vintage = "2019" }, DateTimeOffset.UtcNow);
+        db.Repository.SaveDetails(new WineDetails { Code = "300", Vintage = "2021" }, DateTimeOffset.UtcNow);
+        var vivino = new FakeSource("vivino", _ => new SourceLookup(
+            [new RatingCandidate { Name = "Ressia Gepu Langhe Nebbiolo 2021", Vintage = "2021", Score = 3.9 }], "q"));
+
+        await new RatingService(db.Repository, [vivino]).RateAsync("75", force: false, CancellationToken.None);
+
+        Assert.Equal(78, db.Repository.GetWine("300")!.BestScore);
+        Assert.Empty(db.Repository.GetRatings("150"));
+    }
+
+    [Fact]
+    public async Task Another_vintage_gets_the_remembered_match_as_a_hint()
+    {
+        using var db = new TempDatabase();
+        db.Repository.UpsertListings(
+        [
+            Wines.Listing("2020", "Aldo Conterno Barolo Bussia Cicala 2020"),
+            Wines.Listing("2019", "Aldo Conterno Barolo Bussia Cicala 2019"),
+        ], DateTimeOffset.UtcNow);
+        db.Repository.SaveRating(new RatingResult
+        {
+            Code = "2020", Source = "vivino", Status = RatingStatus.Matched, Score = 4.4, Score100 = 88,
+            MatchedName = "Aldo Conterno Barolo Bussia Cicala 2020", Url = "https://www.vivino.com/w/1234?year=2020",
+        });
+        var vivino = new FakeSource("vivino", _ => new SourceLookup([], "q"));
+
+        await new RatingService(db.Repository, [vivino]).RateAsync("2019", force: false, CancellationToken.None);
+
+        Assert.Equal("https://www.vivino.com/w/1234?year=2020", vivino.LastHint?.Url);
+        Assert.Equal("Aldo Conterno Barolo Bussia Cicala 2020", vivino.LastHint?.MatchedName);
+    }
+
+    [Fact]
+    public async Task Vivino_opens_the_remembered_page_for_the_new_vintage_without_searching()
+    {
+        const string props = """{"vintage":{"name":"Aldo Conterno Barolo Bussia Cicala 2019","year":2019,"statistics":{"ratings_average":4.3,"ratings_count":80},"wine":{"name":"Barolo Bussia Cicala","winery":{"name":"Aldo Conterno"}}}}""";
+        var fetcher = new FakeFetcher()
+            .On(url => url == "https://www.vivino.com/en/aldo-conterno-barolo-bussia-cicala/w/1234?year=2019",
+                _ => new FetchResponse(200, $"<div id=\"ssr-wine-page-top-section\" data-ssr-props='{props}'></div>"));
+        var source = new VivinoSource(new WebSearch(fetcher, TimeSpan.Zero), new RatingFetchers(fetcher, fetcher));
+        var wine = new WineIdentity { Code = "1", Name = "Aldo Conterno Barolo Bussia Cicala 2019", Vintage = "2019", Producer = "Aldo Conterno" };
+        var hint = new RatingResult
+        {
+            Code = "0", Source = "vivino", Status = RatingStatus.Matched,
+            Url = "https://www.vivino.com/en/aldo-conterno-barolo-bussia-cicala/w/1234?year=2020", MatchedName = "Aldo Conterno Barolo Bussia Cicala 2020",
+        };
+
+        var lookup = await source.LookupAsync(wine, 82, CancellationToken.None, hint);
+
+        Assert.Equal(4.3, WineMatcher.BestMatch(wine, lookup.Candidates, 82)!.Candidate.Score);
+        Assert.DoesNotContain(fetcher.Requests, url => url.Contains("search.yahoo.com"));
     }
 
     [Fact]

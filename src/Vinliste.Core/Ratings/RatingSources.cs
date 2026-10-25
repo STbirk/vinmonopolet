@@ -1,3 +1,4 @@
+using Vinliste.Core.Models;
 using System.Text.RegularExpressions;
 using Vinliste.Core.Http;
 
@@ -15,7 +16,11 @@ public interface IRatingSource
     /// <summary>Converts the site's native score to 0–100.</summary>
     double ToScore100(double score);
 
-    Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct);
+    /// <param name="hint">
+    /// How this source matched the same wine in another vintage or bottle size (its page and its
+    /// name for the wine), when known: a much better starting point than a fresh search.
+    /// </param>
+    Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct, RatingResult? hint = null);
 }
 
 /// <summary>
@@ -60,13 +65,49 @@ public abstract partial class WebSearchRatingSource(WebSearch search) : IRatingS
     /// <summary>Key that identifies the same wine page under different URLs (locale paths, query strings).</summary>
     protected virtual string PageKey(string url) => url;
 
-    public async Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct)
+    /// <summary>
+    /// Candidates straight from the remembered page, without searching (null when the source's
+    /// pages are per vintage, so the remembered page cannot be reused).
+    /// </summary>
+    protected virtual Task<IReadOnlyList<RatingCandidate>?> FromRememberedPageAsync(RatingResult hint, WineIdentity wine, CancellationToken ct) =>
+        Task.FromResult<IReadOnlyList<RatingCandidate>?>(null);
+
+    public async Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct, RatingResult? hint = null)
     {
         var name = WineText.AsciiQuery(WineText.StripVintage(WineText.StripVolume(WineText.ExpandAbbreviations(wine.FullName))));
         var vintage = wine.Vintage ?? WineText.ExtractVintage(wine.Name);
         var candidates = new List<RatingCandidate>();
+
+        if (hint is not null)
+        {
+            // Another vintage was matched before: try its page for this vintage first.
+            var remembered = await FromRememberedPageAsync(hint, wine, ct).ConfigureAwait(false);
+            if (remembered is not null)
+            {
+                candidates.AddRange(remembered);
+                if (WineMatcher.BestMatch(wine, candidates, threshold) is { Candidate.Score: not null })
+                {
+                    return new SourceLookup(candidates, $"remembered page {hint.Url}");
+                }
+            }
+        }
+
         var seenPages = new HashSet<string>();
-        var queries = Queries(name, vintage).Select(WineText.CollapseSpaces).Distinct().ToList();
+        var queries = Queries(name, vintage).Select(WineText.CollapseSpaces).ToList();
+        if (hint?.MatchedName is { } knownName)
+        {
+            // Search with the name this site itself uses for the wine (it found it that way before).
+            // Without brackets (appellations, truncated "(Saint…") and grape/style words like
+            // "Bordeaux-Style Red Blend": they only make the search narrower.
+            var siteName = WineText.AsciiQuery(WineText.StripVintage(WineText.StripVolume(WineText.WithoutParentheses(knownName))));
+            siteName = string.Join(' ', siteName.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                .Where(word => !WineText.Generic.Contains(WineText.Normalize(word)) && !WineText.NoiseWords.Contains(WineText.Normalize(word))));
+            if (siteName.Length > 0)
+            {
+                queries.Insert(0, WineText.CollapseSpaces(Queries(siteName, vintage).First()));
+            }
+        }
+        queries = queries.Distinct().ToList();
         var pageFetches = 0;
         var blocked = false;
         var failedSearches = 0;
@@ -176,6 +217,12 @@ public sealed partial class VivinoSource(WebSearch search, RatingFetchers fetche
 
     protected override Task<IReadOnlyList<RatingCandidate>?> FromPageAsync(SearchResult result, WineIdentity wine, CancellationToken ct) =>
         FetchPageAsync(fetchers.Plain, VintageUrl(result.Url, wine.Vintage ?? WineText.ExtractVintage(wine.Name)), RatingParsers.ParseVivinoPage, ct);
+
+    // A Vivino wine page covers every vintage: the remembered one, pointed at this year, is the page.
+    protected override Task<IReadOnlyList<RatingCandidate>?> FromRememberedPageAsync(RatingResult hint, WineIdentity wine, CancellationToken ct) =>
+        hint.Url is { } url && IsWinePage(url)
+            ? FetchPageAsync(fetchers.Plain, VintageUrl(url, wine.Vintage ?? WineText.ExtractVintage(wine.Name)), RatingParsers.ParseVivinoPage, ct)
+            : Task.FromResult<IReadOnlyList<RatingCandidate>?>(null);
 
     /// <summary>Points a Vivino wine URL at the wanted vintage so its own rating is returned.</summary>
     public static string VintageUrl(string url, string? vintage)

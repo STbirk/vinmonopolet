@@ -145,7 +145,9 @@ public static class WineMatcher
 
         var wineText = wine.FullName;
         var wineTokens = WineText.Tokens(wineText).ToHashSet();
-        var similarity = TokenSetRatio(Meaningful(wineText), Meaningful(candidateText));
+        // Similarity uses the full name: bracketed appellations ("(Brunello di Montalcino)") are part
+        // of how the site names the wine. Only the extra-word penalty below ignores brackets.
+        var similarity = TokenSetRatio(Meaningful(wineText), Meaningful($"{candidateProducer} {candidate.Name}"));
 
         // Wine-specific words the candidate lacks (e.g. "La Casa", "Sciulun") point to a sibling wine.
         var missing = WineText.DistinctiveTokens(wineText)
@@ -166,13 +168,15 @@ public static class WineMatcher
 
         // One unexplained word must take a perfect name below the default threshold (82): with
         // equal names, "Gevrey-Chambertin" and "Gevrey-Chambertin Les Cazetiers" differ only by it.
-        return similarity - 20 * missing - 20 * otherExtras - 30 * secondWine - 25 * qualifierMismatch;
+        // A barrel sample is scored before bottling: rank it just below a finished-wine review.
+        var barrelSample = candidate.Name.Contains("barrel sample", StringComparison.OrdinalIgnoreCase) ? 3 : 0;
+        return similarity - 20 * missing - 20 * otherExtras - 30 * secondWine - 25 * qualifierMismatch - barrelSample;
     }
 
-    /// <summary>Normalised text without stopwords, so "Tinto", "Domaine" or "Brut" do not dilute similarity.</summary>
+    /// <summary>Normalised text without stopwords and noise words ("Tinto", "Domaine", "Vigna"), so they do not dilute similarity.</summary>
     private static string Meaningful(string text)
     {
-        var tokens = WineText.Tokens(text).Where(t => !WineText.Stopwords.Contains(t)).ToList();
+        var tokens = WineText.Tokens(text).Where(t => !WineText.Stopwords.Contains(t) && !WineText.NoiseWords.Contains(t)).ToList();
         return tokens.Count > 0 ? string.Join(' ', tokens) : WineText.Normalize(text);
     }
 

@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Vinliste.App.Services;
 using Vinliste.Core.Data;
 using Vinliste.Core.Models;
+using Vinliste.Core.Ratings;
 using Vinliste.Core.Vinmonopolet;
 
 namespace Vinliste.App.ViewModels;
@@ -245,6 +246,14 @@ public sealed partial class WineDetailViewModel : ObservableObject
             await Task.Run(() => _services.Ratings.RateAsync(Row.Code, force: true, _lifetime.Token));
             LoadRatings();
             ReloadRow();
+            // The same wine in other bottle sizes received these ratings too; update their rows.
+            foreach (var sibling in _services.Repository.GetSiblingCodes(Row.Code))
+            {
+                if (_services.Repository.GetWine(sibling) is { } row)
+                {
+                    _rowChanged(row);
+                }
+            }
             RatingMessage = "";
         }
         catch (OperationCanceledException)
@@ -358,7 +367,9 @@ public sealed partial class WineDetailViewModel : ObservableObject
                 r.MatchConfidence is null ? null : $"{r.MatchConfidence:0}% match"),
             RatingStatus.NoMatch => r.MatchConfidence is null ? "No similar wine found" : $"Closest candidate {r.MatchConfidence:0}% match",
             _ => r.Error ?? "",
-        } + $" · {r.FetchedAt.LocalDateTime:d}";
+        } + (r.SearchQuery?.StartsWith(RatingService.SharedPrefix, StringComparison.Ordinal) == true ? " · from another bottle size" : "")
+          + (r.SearchQuery?.StartsWith("remembered page", StringComparison.Ordinal) == true ? " · found via another vintage" : "")
+          + $" · {r.FetchedAt.LocalDateTime:d}";
         return new RatingDisplay(r.Source, label, status, score, r.Score100, r.Url, r.MatchedName, detail);
     }
 

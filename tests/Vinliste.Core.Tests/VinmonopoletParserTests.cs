@@ -86,6 +86,7 @@ public class VinmonopoletParserTests
     [InlineData("Château X 1998 Magnum", "1998")]
     [InlineData("Rosso di Montalcino", null)]
     [InlineData("Cuvée 3000", null)]
+    [InlineData("Kruger-Rumpf Abtei #1937 Riesling Trocken 2023", "2023")]
     public void ExtractVintage_finds_plausible_years(string name, string? expected) =>
         Assert.Equal(expected, VinmonopoletParser.ExtractVintage(name));
 

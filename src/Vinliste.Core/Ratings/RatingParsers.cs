@@ -145,7 +145,7 @@ public static partial class RatingParsers
                 }
                 candidates.Add(new RatingCandidate
                 {
-                    Name = candidateName.Trim(),
+                    Name = System.Net.WebUtility.HtmlDecode(candidateName.Trim()),
                     Producer = brand,
                     Vintage = WineText.ExtractVintage(candidateName) ?? WineText.ExtractVintage(url),
                     Score = score,

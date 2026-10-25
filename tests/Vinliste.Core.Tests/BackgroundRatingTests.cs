@@ -18,7 +18,7 @@ public class BackgroundRatingTests
         public string Label => id;
         public double ToScore100(double score) => score <= 5 ? score * 20 : score;
 
-        public Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct)
+        public Task<SourceLookup> LookupAsync(WineIdentity wine, double threshold, CancellationToken ct, RatingResult? hint = null)
         {
             Interlocked.Increment(ref _calls);
             return Task.FromResult(lookup(wine));

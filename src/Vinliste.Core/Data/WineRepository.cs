@@ -55,11 +55,11 @@ public sealed class WineRepository(VinlisteDatabase database)
             INSERT INTO wines (code, name, category_code, category, sub_category, country, district, sub_district,
                 vintage, volume_cl, alcohol, price, litre_price, status, product_selection, buyable, expired,
                 available_online, available_in_stores, availability_text, sustainable, url, image_url,
-                first_seen_at, last_seen_at, search_text)
+                first_seen_at, last_seen_at, search_text, cuvee_key)
             VALUES ($code, $name, $category_code, $category, $sub_category, $country, $district, $sub_district,
                 $vintage, $volume_cl, $alcohol, $price, $litre_price, $status, $product_selection, $buyable, $expired,
                 $available_online, $available_in_stores, $availability_text, $sustainable, $url, $image_url,
-                $now, $now, $search_text)
+                $now, $now, $search_text, $cuvee_key)
             """);
 
         // Vintage, volume and image from the product page are better than the listing's;
@@ -68,7 +68,7 @@ public sealed class WineRepository(VinlisteDatabase database)
             UPDATE wines SET
                 name = $name, category_code = $category_code, category = $category, sub_category = $sub_category,
                 country = $country, district = $district, sub_district = $sub_district,
-                vintage = COALESCE(vintage, $vintage), volume_cl = COALESCE($volume_cl, volume_cl),
+                vintage = CASE WHEN details_updated_at IS NULL THEN COALESCE($vintage, vintage) ELSE COALESCE(vintage, $vintage) END, volume_cl = COALESCE($volume_cl, volume_cl),
                 alcohol = COALESCE($alcohol, alcohol),
                 previous_price = CASE WHEN $price_changed THEN price ELSE previous_price END,
                 price_changed_at = CASE WHEN $price_changed THEN $now ELSE price_changed_at END,
@@ -76,7 +76,7 @@ public sealed class WineRepository(VinlisteDatabase database)
                 -- The product page's litre price accounts for deposit; keep it once details exist.
                 litre_price = CASE WHEN details_updated_at IS NULL OR $price_changed
                                    THEN COALESCE($litre_price, litre_price) ELSE litre_price END,
-                search_text = $search_text,
+                search_text = $search_text, cuvee_key = $cuvee_key,
                 status = $status, product_selection = $product_selection, buyable = $buyable, expired = $expired,
                 available_online = $available_online, available_in_stores = $available_in_stores,
                 availability_text = $availability_text, sustainable = $sustainable,
@@ -504,6 +504,57 @@ public sealed class WineRepository(VinlisteDatabase database)
     }
 
     /// <summary>
+    /// The same wine in other bottle sizes: same name (without volume), category and country, same
+    /// vintage (so a vintage-specific score never reaches another vintage). Ratings are about the
+    /// wine, not the bottle, so these share them. Without a vintage the products only count as the
+    /// same when both have product details saved (which would show a year; a failed page fetch does
+    /// not count): a missing year in the listing more often means "not stated" than "non-vintage".
+    /// </summary>
+    public IReadOnlyList<string> GetSiblingCodes(string code)
+    {
+        using var connection = database.Open();
+        return QueryRows(connection, """
+            SELECT s.code FROM wines w JOIN wines s
+              ON s.cuvee_key = w.cuvee_key AND s.code <> w.code
+             AND s.country IS w.country
+             AND (s.vintage = w.vintage
+                  OR (s.vintage IS NULL AND w.vintage IS NULL
+                      AND s.details_search_text IS NOT NULL AND w.details_search_text IS NOT NULL))
+            WHERE w.code = $code AND w.cuvee_key IS NOT NULL
+            ORDER BY s.code
+            """, ("$code", code)).Select(r => (string)r[0]!).ToList();
+    }
+
+    /// <summary>
+    /// How a source last identified this wine in any vintage or bottle size (its page and its name
+    /// for the wine), so another vintage can be looked up directly instead of guessed from a search.
+    /// </summary>
+    public RatingResult? FindRatingLink(string code, string source)
+    {
+        using var connection = database.Open();
+        var row = QueryRows(connection, """
+            SELECT r.url, r.matched_name, r.matched_vintage, r.code
+            FROM wines w JOIN wines s ON s.cuvee_key = w.cuvee_key AND s.country IS w.country
+            JOIN ratings r ON r.code = s.code AND r.source = $source
+            WHERE w.code = $code AND w.cuvee_key IS NOT NULL AND s.code <> w.code
+              AND r.status IN ('matched', 'matched_no_score') AND r.url IS NOT NULL AND r.matched_name IS NOT NULL
+            ORDER BY r.fetched_at DESC
+            LIMIT 1
+            """, ("$code", code), ("$source", source)).FirstOrDefault();
+        return row is null
+            ? null
+            : new RatingResult
+            {
+                Code = (string)row[3]!,
+                Source = source,
+                Status = RatingStatus.Matched,
+                Url = (string)row[0]!,
+                MatchedName = (string)row[1]!,
+                MatchedVintage = row[2] as string,
+            };
+    }
+
+    /// <summary>
     /// Marks a wine as checked now, even if no source result was saved (all fresh, or a transient
     /// failure kept an older match), so the background rater moves on to other wines.
     /// </summary>
@@ -880,6 +931,7 @@ public sealed class WineRepository(VinlisteDatabase database)
         command.Parameters.AddWithValue("$image_url", Db(wine.ImageUrl));
         command.Parameters.AddWithValue("$now", now);
         command.Parameters.AddWithValue("$search_text", SearchText(wine.Name, wine.Code, wine.Country, wine.District, wine.SubDistrict, wine.Category));
+        command.Parameters.AddWithValue("$cuvee_key", VinlisteDatabase.CuveeKey(wine.Name, wine.CategoryCode));
     }
 
     /// <summary>Lower-case, accent-folded text so "øko" finds "Øko" and "chateau" finds "Château".</summary>
