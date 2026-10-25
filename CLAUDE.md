@@ -65,6 +65,12 @@ deliberately cautious: only wines missing from this run and the previous complet
 categories paged to the end without an empty page, and only if at least 80% of the category was seen.
 One run at a time per process (`RunGate`).
 
+Background work derives from `Sync/BackgroundLoop` (start, stop-and-wait, restart with a new
+interval; never throws from `StopAsync`) and writes to `Diagnostics/ActivityLog`, which feeds the
+in-app activity panel. Every HTTP transport is wrapped in `LoggingFetcher` in `AppServices`.
+`BackgroundRatingUpdater` rates one wine per interval (`NextWineForRating` picks the order and
+`TouchRatings` keeps it rotating).
+
 `BackgroundCatalogUpdater` runs that same service in a loop while the app is open, with
 `CatalogSyncOptions.PageDelay` (default 60 s) before each page. "Update now" stops the loop, continues
 the same run cursor at full speed, then restarts it. First start installs the bundled starter
@@ -72,7 +78,9 @@ catalogue (`SeedDatabase.InstallIfNeeded`, embedded `src/Vinliste.App/Seed/vinli
 by `tools/Vinliste.SeedBuilder`); it never overwrites a database that has wines.
 
 ### Rating engine (`Ratings/`)
-`WebSearchRatingSource` runs site-restricted Yahoo searches (a second phrasing only if the first gives
+`WebSearch.IsResultsPage` decides whether Yahoo answered with a real results page; a page that is
+not one counts as a failed search (an error, retried soon) rather than "no match". Every normal page
+links to guce.yahoo.com, so never key on consent hosts. `WebSearchRatingSource` runs site-restricted Yahoo searches (a second phrasing only if the first gives
 no scored match), reads scores from snippets where sites put them (CellarTracker, Falstaff, WE) and opens
 at most 3 result pages otherwise. `RatingService` runs sources in parallel per wine, caches results by
 status (matched 90 d, no match 30 d, error/blocked 1 d) and never lets a transient error overwrite a
@@ -103,6 +111,9 @@ lookup survive refreshes; `ReplaceRow` updates one row in place. Long work goes 
   `VINLISTE_SNAPSHOT_PAGE=<AllWines|Favorites|NewArrivals|PriceDrops|Settings>`,
   `VINLISTE_SNAPSHOT_RATE=1` and `VINLISTE_SNAPSHOT_EXIT=1` drive it. The theme comes from
   `settings.json` in the data folder.
-- Every app start begins background updates against the live site; put
-  `"BackgroundUpdates": false` in that `settings.json` when a run should stay offline. An empty
+- Every app start begins background catalogue updates and background ratings against the live
+  sites; put `"BackgroundUpdates": false, "BackgroundRatings": false` in that `settings.json`
+  when a run should stay offline.
+- When checking rating accuracy live, use a fresh database: a failed lookup keeps the previously
+  stored match, so a reused database can show matches even when every search failed. An empty
   data folder gets the starter catalogue installed on start.

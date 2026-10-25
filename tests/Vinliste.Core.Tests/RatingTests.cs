@@ -168,6 +168,19 @@ public class WineMatcherTests
     }
 
     [Fact]
+    public void Grape_names_reveal_colour_when_no_colour_word_is_given()
+    {
+        // Found live: Wine Enthusiast's Pinot Noir from the same château was accepted for the white.
+        var white = Wine("Bader-Mimeur Ch. de Chassagne-Montrachet 2022", "Bader-Mimeur") with { CategoryCode = "hvitvin" };
+
+        Assert.Null(WineMatcher.Score(white, Candidate("Bader-Mimeur 2022 Château de Chassagne-Montrachet Pinot Noir")));
+        Assert.Equal("white", WineText.ColourOf("Backhouse Chardonnay 2023"));
+        Assert.Equal("red", WineText.ColourOf("Bründlmayer Pinot Noir"));
+        // A red grape co-fermented with a white one says nothing about the colour.
+        Assert.Null(WineText.ColourOf("Côte-Rôtie Syrah Viognier"));
+    }
+
+    [Fact]
     public void Owner_as_producer_does_not_block_the_brand()
     {
         // Vinmonopolet lists André Lurton as producer of Château La Louvière.
@@ -260,6 +273,33 @@ public class RatingParserTests
         Assert.Equal(92, candidate.Score);
         Assert.Equal("Franco Conterno", candidate.Producer);
         Assert.Equal("2011", candidate.Vintage);
+    }
+
+    [Fact]
+    public void Results_page_detection_ignores_footer_consent_links()
+    {
+        // Real pages carry guce.yahoo.com in a meta tag and the footer; that must not count as a consent wall.
+        const string results = """
+            <meta name="oath:guce:consent-host" content="guce.yahoo.com"/>
+            <div id="results"><ol class="searchCenterMiddle"></ol></div>
+            <a href="https://guce.yahoo.com/privacy-policy">Privacy</a>
+            """;
+        const string consentWall = """<form class="consent-form" action="https://consent.yahoo.com/v2/collectConsent">Before you continue</form>""";
+
+        Assert.True(WebSearch.IsResultsPage(results));
+        Assert.False(WebSearch.IsResultsPage(consentWall));
+    }
+
+    [Fact]
+    public async Task Search_with_no_hits_is_no_match_not_an_error()
+    {
+        var fetcher = new FakeFetcher().On("search.yahoo.com", """<div id="results"><ol class="searchCenterMiddle"></ol></div>""");
+        var search = new WebSearch(fetcher, TimeSpan.Zero);
+
+        var results = await search.SearchAsync("site:vivino.com nothing", "vivino.com", CancellationToken.None);
+
+        Assert.NotNull(results);
+        Assert.Empty(results);
     }
 
     [Fact]
@@ -492,7 +532,7 @@ public class RatingServiceTests
     {
         const string props = """{"vintage":{"name":"Ressia Gepu Langhe Nebbiolo 2021","year":2021,"statistics":{"ratings_average":3.9,"ratings_count":40},"wine":{"name":"Gepu Langhe Nebbiolo","winery":{"name":"Ressia"}}}}""";
         var yahoo = """
-            <div class="algo"><div class="compTitle"><a href="https://r.search.yahoo.com/x/RU=https%3a%2f%2fwww.vivino.com%2fen%2fressia-gepu-langhe-nebbiolo%2fw%2f1762553/RK=0"><h3>Ressia Gepu Langhe Nebbiolo | Vivino</h3></a></div></div>
+            <div id="results"><div class="algo"><div class="compTitle"><a href="https://r.search.yahoo.com/x/RU=https%3a%2f%2fwww.vivino.com%2fen%2fressia-gepu-langhe-nebbiolo%2fw%2f1762553/RK=0"><h3>Ressia Gepu Langhe Nebbiolo | Vivino</h3></a></div></div></div>
             """;
         var fetcher = new FakeFetcher()
             .On("search.yahoo.com", yahoo)

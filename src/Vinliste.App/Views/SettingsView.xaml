@@ -28,6 +28,14 @@
                     <ComboBox ItemsSource="{Binding PaceOptions}" SelectedItem="{Binding SelectedPace}" DisplayMemberPath="Label"
                               Width="360" HorizontalAlignment="Left" Margin="44,0,0,0"
                               IsEnabled="{Binding BackgroundUpdates}" />
+
+                    <CheckBox Style="{StaticResource Switch}" Content="Collect ratings in the background"
+                              IsChecked="{Binding BackgroundRatings}" Margin="0,20,0,0" />
+                    <TextBlock Style="{StaticResource CaptionText}" Margin="44,4,0,10"
+                               Text="Looks up one wine at a time on the rating sites: favourites first, then wines you have opened, then the core range. Each wine is checked again after 30 days. It is slow on purpose, so the sites are not overloaded; the Activity panel shows each lookup." />
+                    <ComboBox ItemsSource="{Binding RatingPaceOptions}" SelectedItem="{Binding SelectedRatingPace}" DisplayMemberPath="Label"
+                              Width="360" HorizontalAlignment="Left" Margin="44,0,0,0"
+                              IsEnabled="{Binding BackgroundRatings}" />
                 </StackPanel>
             </Border>
 

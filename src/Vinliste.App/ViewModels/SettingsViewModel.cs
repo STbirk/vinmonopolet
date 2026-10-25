@@ -40,8 +40,18 @@ public sealed partial class SettingsViewModel(AppServices services, Action setti
         new("One page every 5 minutes (a full pass in ~4 days)", 300),
     ];
 
+    public IReadOnlyList<PaceOption> RatingPaceOptions { get; } =
+    [
+        new("One wine a minute (~1,000 wines a day of open time)", 60),
+        new("One wine every 2 minutes", 120),
+        new("One wine every 5 minutes", 300),
+        new("One wine every 15 minutes", 900),
+    ];
+
     [ObservableProperty] private bool _backgroundUpdates;
     [ObservableProperty] private PaceOption? _selectedPace;
+    [ObservableProperty] private bool _backgroundRatings;
+    [ObservableProperty] private PaceOption? _selectedRatingPace;
     [ObservableProperty] private bool _isDarkTheme;
     [ObservableProperty] private double _matchThreshold = 82;
     [ObservableProperty] private Store? _favoriteStore;
@@ -76,6 +86,8 @@ public sealed partial class SettingsViewModel(AppServices services, Action setti
         IsDarkTheme = settings.Theme == "Dark";
         BackgroundUpdates = settings.BackgroundUpdates;
         SelectedPace = PaceOptions.MinBy(o => Math.Abs(o.Seconds - settings.BackgroundPageDelaySeconds));
+        BackgroundRatings = settings.BackgroundRatings;
+        SelectedRatingPace = RatingPaceOptions.MinBy(o => Math.Abs(o.Seconds - settings.BackgroundRatingDelaySeconds));
         MatchThreshold = settings.MatchThreshold;
         Latitude = settings.Latitude?.ToString(CultureInfo.InvariantCulture) ?? "";
         Longitude = settings.Longitude?.ToString(CultureInfo.InvariantCulture) ?? "";
@@ -129,6 +141,8 @@ public sealed partial class SettingsViewModel(AppServices services, Action setti
         settings.EnabledRatingSources = Sources.Where(s => s.IsEnabled).Select(s => s.Id).ToList();
         settings.BackgroundUpdates = BackgroundUpdates;
         settings.BackgroundPageDelaySeconds = SelectedPace?.Seconds ?? 60;
+        settings.BackgroundRatings = BackgroundRatings;
+        settings.BackgroundRatingDelaySeconds = SelectedRatingPace?.Seconds ?? 300;
         services.SaveSettings();
         services.RebuildRatings();
         _ = services.ApplyBackgroundSettingsAsync();

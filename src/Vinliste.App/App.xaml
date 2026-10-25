@@ -21,6 +21,7 @@
             <conv:StockTextConverter x:Key="StockText" />
             <conv:EnumMatchConverter x:Key="EnumMatch" />
             <conv:WineSubtitleConverter x:Key="WineSubtitle" />
+            <conv:ActiveOpacityConverter x:Key="ActiveOpacity" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

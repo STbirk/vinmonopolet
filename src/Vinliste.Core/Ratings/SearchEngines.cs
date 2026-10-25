@@ -35,10 +35,14 @@ public sealed class WebSearch(IHttpFetcher fetcher, TimeSpan? minInterval = null
         return yahoo.IsSuccess && IsResultsPage(yahoo.Body) ? ParseYahoo(yahoo.Body, domain) : null;
     }
 
-    /// <summary>A consent wall served with 200 is a failure, not "no results".</summary>
+    /// <summary>
+    /// True for a real results page (with or without hits). A consent wall or error page served
+    /// with 200 lacks the results container and counts as a failure, not as "no results".
+    /// Do not test for consent hosts: every normal page links to guce.yahoo.com in its footer.
+    /// </summary>
     public static bool IsResultsPage(string html) =>
-        !html.Contains("consent.yahoo.com", StringComparison.OrdinalIgnoreCase)
-        && !html.Contains("guce.yahoo.com", StringComparison.OrdinalIgnoreCase);
+        html.Contains("id=\"results\"", StringComparison.Ordinal)
+        || html.Contains("searchCenterMiddle", StringComparison.Ordinal);
 
     private async Task<FetchResponse> ThrottledGetAsync(string url, CancellationToken ct)
     {

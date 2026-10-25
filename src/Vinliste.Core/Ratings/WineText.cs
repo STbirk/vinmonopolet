@@ -74,8 +74,30 @@ public static partial class WineText
         }
         var red = tokens.Any(RedWords.Contains);
         var white = tokens.Any(WhiteWords.Contains);
-        return red == white ? null : red ? "red" : "white";
+        if (red != white)
+        {
+            return red ? "red" : "white";
+        }
+        // No colour word: a grape name gives it away ("… Pinot Noir" is not the producer's white).
+        var padded = $" {normalized} ";
+        var redGrape = RedGrapes.Any(g => padded.Contains($" {g} ", StringComparison.Ordinal));
+        var whiteGrape = WhiteGrapes.Any(g => padded.Contains($" {g} ", StringComparison.Ordinal));
+        return redGrape == whiteGrape ? null : redGrape ? "red" : "white";
     }
+
+    private static readonly string[] RedGrapes =
+    [
+        "pinot noir", "cabernet sauvignon", "cabernet franc", "merlot", "syrah", "shiraz", "nebbiolo", "sangiovese",
+        "tempranillo", "malbec", "zinfandel", "primitivo", "gamay", "barbera", "dolcetto", "carmenere", "pinotage",
+        "mourvedre", "aglianico", "nero d avola", "touriga nacional", "blaufrankisch", "zweigelt", "spatburgunder",
+    ];
+
+    private static readonly string[] WhiteGrapes =
+    [
+        "chardonnay", "riesling", "sauvignon blanc", "chenin blanc", "viognier", "gewurztraminer", "gruner veltliner",
+        "albarino", "semillon", "pinot gris", "pinot grigio", "verdejo", "vermentino", "muscadet", "gruner",
+        "marsanne", "roussanne", "torrontes", "furmint", "assyrtiko", "garganega", "weissburgunder",
+    ];
 
     /// <summary>Cuvée numbers ("Collection 244", "171ème"), which must agree when both sides have one.</summary>
     public static IReadOnlySet<string> CuveeNumbers(string? text) =>

@@ -33,6 +33,18 @@ public sealed class AppSettings
 
     /// <summary>Seconds between listing pages for background updates (one page per minute by default).</summary>
     public int BackgroundPageDelaySeconds { get; set; } = 60;
+
+    /// <summary>Collect ratings slowly while the app is open.</summary>
+    public bool BackgroundRatings { get; set; } = true;
+
+    /// <summary>Seconds between wines for background ratings (one wine every five minutes by default).</summary>
+    public int BackgroundRatingDelaySeconds { get; set; } = 300;
+
+    /// <summary>Whether the activity panel (the mini terminal) is open.</summary>
+    public bool ShowActivityPanel { get; set; }
+
+    /// <summary>Whether the activity panel also lists every web request.</summary>
+    public bool ShowWebRequests { get; set; }
     public List<string> EnabledRatingSources { get; set; } = ["vivino", "cellartracker", "falstaff", "wine_enthusiast"];
 
     public static AppSettings Load(string? path = null)

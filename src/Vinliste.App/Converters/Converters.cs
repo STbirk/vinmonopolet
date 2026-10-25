@@ -128,6 +128,14 @@ public sealed class WineSubtitleConverter : IValueConverter
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => throw new NotSupportedException();
 }
 
+/// <summary>Full opacity while active, dimmed when idle or off.</summary>
+public sealed class ActiveOpacityConverter : IValueConverter
+{
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value is true ? 1.0 : 0.4;
+
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => throw new NotSupportedException();
+}
+
 /// <summary>Enum page to IsChecked for the navigation rail.</summary>
 public sealed class EnumMatchConverter : IValueConverter
 {

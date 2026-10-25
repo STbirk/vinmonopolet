@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using Vinliste.App.Services;
 using Vinliste.Core.Data;
+using Vinliste.Core.Diagnostics;
 using Vinliste.Core.Sync;
 using Vinliste.Core.Vinmonopolet;
 
@@ -100,6 +101,43 @@ public sealed partial class MainViewModel : ObservableObject
             }
         });
         services.Background.PassCompleted += (_, _) => dispatcher.BeginInvoke(AfterJob);
+
+        Activity = new ActivityViewModel(services, dispatcher);
+        services.BackgroundRatings.StatusChanged += (_, status) => dispatcher.BeginInvoke(() =>
+        {
+            RatingsText = status.Message;
+            IsRatingsActive = status.IsActive;
+        });
+        // A wine rated in the background: update its row (score badge) and an open detail pane.
+        services.BackgroundRatings.WineRated += (_, code) => dispatcher.BeginInvoke(() =>
+        {
+            if (_services.Repository.GetWine(code) is { } row)
+            {
+                ReplaceRow(row);
+                if (Detail?.Row.Code == code)
+                {
+                    Detail.Reload();
+                }
+            }
+        });
+        // Foreground jobs (Update now, Get details, Rate selected) log their start and outcome,
+        // not every progress tick, so background history is not pushed out of the panel.
+        Job.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName != nameof(JobViewModel.IsBusy))
+            {
+                return;
+            }
+            if (Job.IsBusy)
+            {
+                services.Activity.Write("job", $"{Job.Title} started");
+            }
+            else if (Job.Message.Length > 0)
+            {
+                services.Activity.Write("job", Job.Message,
+                    Job.Message.Contains("failed", StringComparison.OrdinalIgnoreCase) ? ActivityLevel.Warning : ActivityLevel.Success);
+            }
+        };
         if (services.SeedInstalled)
         {
             Job.Message = services.Settings.BackgroundUpdates
@@ -111,6 +149,11 @@ public sealed partial class MainViewModel : ObservableObject
 
     [ObservableProperty] private string _backgroundText = "";
     [ObservableProperty] private bool _isBackgroundActive;
+    [ObservableProperty] private string _ratingsText = "";
+    [ObservableProperty] private bool _isRatingsActive;
+
+    /// <summary>The mini terminal at the bottom of the window.</summary>
+    public ActivityViewModel Activity { get; } = null!;
 
     public JobViewModel Job { get; }
     public SettingsViewModel Settings { get; }

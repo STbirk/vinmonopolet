@@ -105,6 +105,14 @@
                                            Foreground="{DynamicResource NavTextMutedBrush}"
                                            ToolTip="While Vinliste is open it checks Vinmonopolet slowly in the background (one page a minute by default), so the list stays current without you doing anything." />
                             </DockPanel>
+                            <DockPanel Margin="0,-4,0,10" Visibility="{Binding RatingsText, Converter={StaticResource VisibleWhen}}">
+                                <TextBlock DockPanel.Dock="Left" Text="&#xE735;" FontFamily="{StaticResource IconFont}" FontSize="8"
+                                           Margin="0,3,6,0" VerticalAlignment="Top" Foreground="{DynamicResource CorkBrush}"
+                                           Opacity="{Binding IsRatingsActive, Converter={StaticResource ActiveOpacity}}" />
+                                <TextBlock Text="{Binding RatingsText}" FontSize="10.5" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                                           MaxHeight="30" Foreground="{DynamicResource NavTextMutedBrush}"
+                                           ToolTip="While Vinliste is open it looks up ratings for one wine at a time (every five minutes by default): favourites first, then wines you have opened, then the core range." />
+                            </DockPanel>
                             <Button Command="{Binding UpdateCatalogCommand}" HorizontalAlignment="Stretch"
                                     IsEnabled="{Binding Job.IsBusy, Converter={StaticResource InverseBool}}"
                                     Background="{DynamicResource CorkBrush}" BorderBrush="{DynamicResource CorkBrush}" Foreground="#2A0B14"
@@ -125,6 +133,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -384,15 +393,34 @@
             <views:SettingsView Grid.Row="0" Grid.RowSpan="2" DataContext="{Binding Settings}"
                                 Visibility="{Binding DataContext.IsSettingsPage, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource VisibleWhen}}" />
 
+            <!-- Activity panel: a mini terminal showing what background work is doing. -->
+            <views:ActivityPanel Grid.Row="2" Margin="28,0,28,12" DataContext="{Binding Activity}"
+                                 Visibility="{Binding IsOpen, Converter={StaticResource VisibleWhen}}" />
+
             <!-- Status bar -->
-            <Border Grid.Row="2" Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0"
+            <Border Grid.Row="3" Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0"
                     Padding="28,8">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    <!-- Activity toggle, with the latest background line while the panel is closed. -->
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="16,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Activity.Latest}" Style="{StaticResource CaptionText}" FontSize="11.5" MaxWidth="420"
+                                   TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,10,0"
+                                   FontFamily="Cascadia Mono, Consolas"
+                                   Visibility="{Binding Activity.IsOpen, Converter={StaticResource CollapsedWhen}}" />
+                        <ToggleButton IsChecked="{Binding Activity.IsOpen}" Style="{StaticResource FilterChip}" Margin="0" Padding="10,4"
+                                      ToolTip="Show what Vinliste is doing in the background">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource IconText}" Text="&#xE756;" FontSize="12" Margin="0,0,6,0" />
+                                <TextBlock Text="Activity" />
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
                     <TextBlock Style="{StaticResource IconText}" Text="&#xE9F5;" Margin="0,0,10,0" FontSize="13"
                                Foreground="{DynamicResource AccentBrush}"
                                Visibility="{Binding Job.IsBusy, Converter={StaticResource VisibleWhen}}" />

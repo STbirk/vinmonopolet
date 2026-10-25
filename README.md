@@ -22,7 +22,13 @@ collects scores from Vivino, CellarTracker, Falstaff and Wine Enthusiast.
   Fetched when you open a wine, or in bulk with **Get details**.
 - **Stock per store.** **Check stock** lists every store that has the wine, nearest first,
   with your favourite store on top.
-- **Ratings.** **Find ratings** (one wine) or **Rate selected / Rate listed** (many) search
+- **Ratings in the background.** While the app is open it also looks up ratings for one wine
+  at a time (every five minutes by default): favourites first, then wines you have opened, then
+  the core range, re-checking each wine after 30 days. Scores appear in the list as they arrive.
+- **Activity panel.** The **Activity** button in the status bar opens a small terminal that shows
+  what the background work is doing, line by line: catalogue pages, each rating lookup and its
+  result, and (optionally) every web request.
+- **Ratings on demand.** **Find ratings** (one wine) or **Rate selected / Rate listed** (many) search
   each site and match carefully: producer, vintage, colour and wine-specific words such as
   the cuvée name, Riserva or a second-wine name must agree. Vivino scores are per vintage
   where available. **Best rating** is the average of the matched scores on a 0–100 scale.

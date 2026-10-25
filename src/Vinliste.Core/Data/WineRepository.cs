@@ -480,6 +480,36 @@ public sealed class WineRepository(VinlisteDatabase database)
         transaction.Commit();
     }
 
+    /// <summary>
+    /// The next wine for the background rater: never rated or not checked for
+    /// <paramref name="recheckAfter"/>, available (or a favourite). Favourites first, then wines
+    /// the user has opened (they have details), then the core range, so the ratings people are
+    /// most likely to look at arrive first.
+    /// </summary>
+    public string? NextWineForRating(TimeSpan recheckAfter)
+    {
+        using var connection = database.Open();
+        return QueryRows(connection, """
+            SELECT code FROM wines
+            WHERE delisted_at IS NULL
+              AND (available_online = 1 OR available_in_stores = 1 OR is_favorite = 1)
+              AND (ratings_updated_at IS NULL OR ratings_updated_at < $cutoff)
+            ORDER BY is_favorite DESC,
+                     ratings_updated_at IS NULL DESC,
+                     details_updated_at IS NOT NULL DESC,
+                     CASE product_selection WHEN 'Basisutvalget' THEN 0 WHEN 'Tilleggsutvalget' THEN 1 ELSE 2 END,
+                     code
+            LIMIT 1
+            """, ("$cutoff", Iso(DateTimeOffset.UtcNow - recheckAfter))).FirstOrDefault()?[0] as string;
+    }
+
+    /// <summary>
+    /// Marks a wine as checked now, even if no source result was saved (all fresh, or a transient
+    /// failure kept an older match), so the background rater moves on to other wines.
+    /// </summary>
+    public void TouchRatings(string code, DateTimeOffset at) =>
+        ExecuteStandalone("UPDATE wines SET ratings_updated_at = $now WHERE code = $code", ("$code", code), ("$now", Iso(at)));
+
     public IReadOnlyList<RatingResult> GetRatings(string code)
     {
         using var connection = database.Open();

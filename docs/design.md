@@ -154,6 +154,13 @@ Improvements over the Python version:
 - **Caching and refresh.** Results are cached in the `ratings` table with
   `fetched_at`; a match is refreshed after 90 days, "no match" after 30 days,
   errors/blocked after 1 day. A transient error never overwrites a stored match.
+- **Background ratings** (`BackgroundRatingUpdater`, on by default): one wine per
+  interval (default 5 minutes) while the app is open. `WineRepository.NextWineForRating`
+  picks available wines (or favourites) never checked or checked more than 30 days
+  ago: favourites, then wines with details (opened by the user), then Basisutvalget,
+  then Tilleggsutvalget. Details are fetched first when missing. Each attempt stamps
+  `ratings_updated_at` (`TouchRatings`) so a wine whose lookup saved nothing is not
+  picked again at once. When every source fails it waits 15 minutes.
 - **Throughput.** Sources run in parallel per wine, two wines at a time, behind
   one shared, polite search-engine gate. Bulk rating runs in the background with
   progress and cancel and can target the selected rows or the listed wines
@@ -181,6 +188,11 @@ Wine-themed, modern, light and dark:
   badge, availability), and a details pane with image, ratings per source with
   links, tasting notes, characteristics bars, grapes, food pairing, facts,
   price history line, stock per store and a personal note.
+- Activity panel: a collapsible, always-dark "terminal" above the status bar fed by
+  `ActivityLog` (Core, thread-safe ring buffer of 1,000 entries). The background loops
+  write their steps and results; `LoggingFetcher` wraps every HTTP transport and logs
+  each request as a detail line (shown when "Web requests" is ticked); foreground job
+  messages are logged too. The status bar shows the latest line while it is closed.
 - The list query runs off the UI thread; only the newest request is applied.
   At most 3,000 rows are shown; the footer asks to narrow the search beyond that.
 - Status bar with background job progress (catalogue update, details, ratings)
